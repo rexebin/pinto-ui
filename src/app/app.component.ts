@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
+import { PageWidthService } from './core/page-width.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+    title = 'app works!';
+    constructor(private pageWidth: PageWidthService){
 
-  model = {
-    left: true,
-    middle: false,
-    right: false
-  };
+    }
 
+    togglePageWidth(){
+        this.pageWidth.isFluid = !this.pageWidth.isFluid;
+    }
 }

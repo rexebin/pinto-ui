@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PageWidthService } from './page-width.service';
 
 /**
  * CoreModule should be providers only module, a single place to host root providers.
@@ -8,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [NgbModule.forRoot()],
   exports: [NgbModule],
-  providers: []
+  providers: [PageWidthService]
 })
 
 export class CoreModule {
@@ -26,6 +27,7 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
+
         //{provide: UserServiceConfig, useValue: config }
       ]
     };
