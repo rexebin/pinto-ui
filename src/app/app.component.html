@@ -1,3 +1,16 @@
 <h1>
   {{title}}
 </h1>
+<button class="btn btn-primary">My Button</button>
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary" [class.active]="model.left">
+    <input type="checkbox" [(ngModel)]="model.left"> Left (pre-checked)
+  </label>
+  <label class="btn btn-primary" [class.active]="model.middle">
+    <input type="checkbox" [(ngModel)]="model.middle"> Middle
+  </label>
+  <label class="btn btn-primary" [class.active]="model.right">
+    <input type="checkbox" [(ngModel)]="model.right"> Right
+  </label>
+</div>
+<pre>{{model | json}}</pre>

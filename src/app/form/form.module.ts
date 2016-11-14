@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-/*
+/**
  * FormModule is to hold all common form related components, directive and pipes.
  * Define list of components, directives and pipes separately, then use spread operators to make module more readable.
  */
@@ -10,10 +10,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   exports: [
-    ReactiveFormsModule
+    FormsModule
   ],
   declarations: []
 })

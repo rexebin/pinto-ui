@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-/*
+/**
  * CoreModule should be providers only module, a single place to host root providers.
  * CoreModule may declare components for AppComponent only, only to clean up the ./app folder.
 */
