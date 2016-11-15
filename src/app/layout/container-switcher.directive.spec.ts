@@ -1,13 +1,10 @@
-/* tslint:disable:no-unused-variable */
-
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { ContainerSwitcherDirective } from './container-switcher.directive';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { PageWidthService } from '../core/page-width.service';
 import '../test/matchers';
 import { StoreModule, Store } from '@ngrx/store';
-import { containerReducer, setContainer, setContainerFluid } from './container-reducer/container.reducer';
+import { containerReducer, setContainer, setContainerFluid } from '../reducer/container.reducer';
 
 
 describe('Directive: ContainerSwitcher', () => {

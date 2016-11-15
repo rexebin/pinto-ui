@@ -7,6 +7,8 @@ import { CoreModule } from './core/core.module';
 import { FormModule } from './form/form.module';
 import { LayoutModule } from './layout/layout.module';
 
+import './rxjs-extensions';
+
 @NgModule({
     declarations: [
         AppComponent,

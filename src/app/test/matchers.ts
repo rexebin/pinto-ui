@@ -1,3 +1,5 @@
+import '../rxjs-extensions';
+
 beforeEach(() => {
   jasmine.addMatchers({
     toHaveCssClass: function (util, customEqualityTests) {

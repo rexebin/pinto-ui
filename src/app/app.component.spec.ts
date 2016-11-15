@@ -1,12 +1,8 @@
-/* tslint:disable:no-unused-variable */
-
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
-import { containerReducer } from './layout/container-reducer/container.reducer';
+import { containerReducer } from './reducer/container.reducer';
 import { StoreModule } from '@ngrx/store';
-import { By } from '@angular/platform-browser';
-import { ContainerSwitcherDirective } from './layout/container-switcher.directive';
 
 describe('App: PintoUi', () => {
   beforeEach(() => {

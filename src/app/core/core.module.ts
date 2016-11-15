@@ -1,8 +1,7 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { PageWidthService } from './page-width.service';
 import { StoreModule } from '@ngrx/store';
-import { containerReducer } from '../layout/container-reducer/container.reducer';
+import { containerReducer } from '../reducer/container.reducer';
 
 /**
  * CoreModule should be providers only module, a single place to host root providers.
@@ -14,7 +13,7 @@ import { containerReducer } from '../layout/container-reducer/container.reducer'
     StoreModule.provideStore({container: containerReducer})
   ],
   exports: [NgbModule, StoreModule],
-  providers: [PageWidthService]
+  providers: []
 })
 
 export class CoreModule {

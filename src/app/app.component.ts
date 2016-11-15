@@ -1,8 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { PageWidthService } from './core/page-width.service';
 import { Store } from '@ngrx/store';
-import { setContainerFluid, setContainer } from './layout/container-reducer/container.reducer';
-import { Subscription } from 'rxjs';
+import { setContainerFluid, setContainer } from './reducer/container.reducer';
 
 @Component({
   selector: 'app-root',
