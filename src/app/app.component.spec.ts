@@ -5,6 +5,7 @@ import { containerReducer } from './reducer/container.reducer';
 import { StoreModule } from '@ngrx/store';
 
 describe('App: PintoUi', () => {
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -30,12 +31,6 @@ describe('App: PintoUi', () => {
     expect(app.title).toEqual('app works!');
   }));
 
-  it('should render title in a div with top-nav class', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('div.top-nav')).toBeTruthy();
-  }));
 
   it('should switch setContainer classes when clicking toggle button', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
