@@ -2,7 +2,6 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { PageWidthService } from './page-width.service';
-import { isNodeFlagSet } from 'tslint/lib/language/utils';
 
 describe('Service: PageWidth', () => {
     beforeEach(() => {
@@ -23,5 +22,16 @@ describe('Service: PageWidth', () => {
         expect(service.isFluid).toBe(false);
     }));
 
+  it('should update observable when isFluid is changed', inject([PageWidthService], (service: PageWidthService) => {
+    let _isFluid = false;
+    let sub = service.widthChanged.subscribe((isFluid) => {
+      _isFluid = isFluid
+    });
+    service.isFluid = true;
+    expect(_isFluid).toBe(true);
+    service.isFluid = false;
+    expect(_isFluid).toBe(false);
+    sub.unsubscribe();
+  }));
 
 });

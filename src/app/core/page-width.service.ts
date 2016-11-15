@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 export class PageWidthService {
     private announceWidthChangeSource = new Subject<boolean>();
     private _isFluid = false;
-    public WidthChanged = this.announceWidthChangeSource.asObservable();
+    public widthChanged = this.announceWidthChangeSource.asObservable();
     constructor() {
     }
 

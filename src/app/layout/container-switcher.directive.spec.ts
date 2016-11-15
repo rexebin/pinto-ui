@@ -39,9 +39,6 @@ describe('Directive: ContainerSwitcher', () => {
         fixture.detectChanges();
         des = fixture.debugElement.queryAll(By.directive(ContainerSwitcherDirective));
     });
-    it('should have one affected element', () => {
-        expect(des.length).toBe(1);
-    });
 
     it('should add class container by default', async(() => {
         expect(<HTMLDivElement>des[0].nativeElement).toHaveCssClass('container');

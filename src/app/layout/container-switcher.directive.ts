@@ -14,7 +14,7 @@ export class ContainerSwitcherDirective implements OnDestroy {
 
     constructor(pageWidth: PageWidthService, private el: ElementRef, private renderer: Renderer) {
         this.setClass(pageWidth.isFluid);
-        this.sub = pageWidth.WidthChanged.subscribe((isFluid) => {
+        this.sub = pageWidth.widthChanged.subscribe((isFluid) => {
             this.setClass(isFluid);
         })
     }
