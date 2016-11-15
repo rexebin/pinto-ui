@@ -1,7 +1,11 @@
 import { Directive, ElementRef, Renderer, OnDestroy } from '@angular/core';
 import { PageWidthService } from '../core/page-width.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
+interface AppState{
+  container: boolean;
+}
 @Directive({
     selector: '[ptContainerSwitcher]'
 })
@@ -12,11 +16,10 @@ export class ContainerSwitcherDirective implements OnDestroy {
         this.sub.unsubscribe();
     }
 
-    constructor(pageWidth: PageWidthService, private el: ElementRef, private renderer: Renderer) {
-        this.setClass(pageWidth.isFluid);
-        this.sub = pageWidth.widthChanged.subscribe((isFluid) => {
-            this.setClass(isFluid);
-        })
+    constructor(private store: Store<AppState>, private el: ElementRef, private renderer: Renderer) {
+        this.sub = this.store.map(state => state['container']).distinctUntilChanged().subscribe(isFluid => {
+        this.setClass(isFluid);
+      });
     }
 
     setClass(isFluid: boolean) {

@@ -6,57 +6,47 @@ import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { PageWidthService } from '../core/page-width.service';
 import '../test/matchers';
-beforeEach(() => {
-    jasmine.addMatchers({
-        toHaveCssClass: function (util, customEqualityTests) {
-            return { compare: buildError(false), negativeCompare: buildError(true) };
+import { StoreModule, Store } from '@ngrx/store';
+import { containerReducer, setContainer, setContainerFluid } from './container-reducer/container.reducer';
 
-            function buildError(isNot: boolean) {
-                return function (actual: HTMLElement, className: string) {
-                    return {
-                        pass: actual.classList.contains(className) === !isNot,
-                        get message() {
-                            return `Expected ${actual.outerHTML} ${isNot ? 'not ' : ''}to contain the CSS class "${className}"`;
-                        }
-                    };
-                };
-            }
-        }
-    });
-});
 
 describe('Directive: ContainerSwitcher', () => {
-    let fixture: ComponentFixture<TestComponent>;
-    let des: DebugElement[];
-    beforeEach(() => {
-        fixture = TestBed.configureTestingModule({
-            declarations: [
-                ContainerSwitcherDirective,
-                TestComponent
-            ],
-            providers: [PageWidthService]
-        }).createComponent(TestComponent);
-        fixture.detectChanges();
-        des = fixture.debugElement.queryAll(By.directive(ContainerSwitcherDirective));
-    });
+  let fixture: ComponentFixture<TestComponent>;
+  let des: DebugElement[];
+  beforeEach(() => {
+    fixture = TestBed.configureTestingModule({
+      imports: [StoreModule.provideStore({ container: containerReducer })],
+      declarations: [
+        ContainerSwitcherDirective,
+        TestComponent
+      ]
 
-    it('should add class container by default', async(() => {
-        expect(<HTMLDivElement>des[0].nativeElement).toHaveCssClass('container');
-        expect(<HTMLDivElement>des[0].nativeElement).not.toHaveCssClass('container-fluid');
-    }));
+    }).createComponent(TestComponent);
+    fixture.detectChanges();
+    des = fixture.debugElement.queryAll(By.directive(ContainerSwitcherDirective));
+  });
 
-    it('should reads the correct value from PageWidthService', async(() => {
-        let pageWidthService = TestBed.get(PageWidthService);
-        pageWidthService.isFluid = true;
-        fixture.detectChanges();
-        expect(<HTMLDivElement>des[0].nativeElement).toHaveCssClass('container-fluid');
-        expect(<HTMLDivElement>des[0].nativeElement).not.toHaveCssClass('container');
-    }));
+  it('should add class setContainer by default', async(() => {
+    expect(<HTMLDivElement>des[0].nativeElement).toHaveCssClass('container');
+    expect(<HTMLDivElement>des[0].nativeElement).not.toHaveCssClass('container-fluid');
+  }));
+
+  it('should reads the correct value after store dispatched actions', async(() => {
+    let store = TestBed.get(Store);
+    store.dispatch({ type: setContainerFluid });
+    fixture.detectChanges();
+    expect(<HTMLDivElement>des[0].nativeElement).toHaveCssClass('container-fluid');
+    expect(<HTMLDivElement>des[0].nativeElement).not.toHaveCssClass('container');
+    store.dispatch({ type: setContainer });
+    fixture.detectChanges();
+    expect(<HTMLDivElement>des[0].nativeElement).not.toHaveCssClass('container-fluid');
+    expect(<HTMLDivElement>des[0].nativeElement).toHaveCssClass('container');
+  }));
 
 });
 
 @Component({
-    template: `<div ptContainerSwitcher></div>`
+  template: `<div ptContainerSwitcher></div>`
 })
 class TestComponent {
 }
