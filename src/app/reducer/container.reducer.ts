@@ -9,7 +9,7 @@ export const containerReducer: ActionReducer<boolean> = (state: boolean = false,
     case setContainer:
       return false;
     default:
-      return false;
+      return state;
   }
 };
 

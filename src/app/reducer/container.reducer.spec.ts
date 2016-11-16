@@ -2,14 +2,14 @@
 import { containerReducer, setContainerFluid, setContainer } from './container.reducer';
 describe('Container Reducer', () => {
 
-  it('should return true when action type is containerFluid', () => {
+  it('should return true/false when action type is containerFluid/container', () => {
+    expect(containerReducer(null, { type: setContainerFluid })).toBeTruthy();
+    expect(containerReducer(null, { type: setContainer })).toBeFalsy();
+  });
 
-    expect(containerReducer(false, { type: setContainerFluid })).toBeTruthy();
-    expect(containerReducer(false, { type: setContainer })).toBeFalsy();
-    expect(containerReducer(true, { type: setContainerFluid })).toBeTruthy();
-    expect(containerReducer(false, { type: setContainer })).toBeFalsy();
-
+  it('should return current state if type is not valid', () => {
     expect(containerReducer(false, { type: 'nothingMatching' })).toBeFalsy();
+    expect(containerReducer(true, { type: 'nothingMatching' })).toBeTruthy();
   });
 
 });

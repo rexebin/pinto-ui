@@ -6,8 +6,6 @@ To abstract menu items to a set of arrays, so that it is easy to create and main
 
 ## Menu model
 
-source: primeng.
-
 ```
 export interface MenuItem {
   label?: string; //item label
@@ -42,3 +40,17 @@ export interface MenuItem {
 1. pt-top-nav-sub receive MenuItem.
 
 
+## pt-top-nav
+
+1. input: model: MenuItem[]
+1. template:
+  * navbar
+  * ngFor - loop model, each MenuItem has one loop.
+  * use pt-top-nav-sub for each loop, providing each MenuItem
+  
+   
+##pt-top-nav-sub
+1. input: menuItem: MenuItem
+1. when MenuItem has not child items, then it is plain button with proper links and actions.
+1. when MenuItem has child items, then it renders a dropdown list, ignore any child items of child items.
+  
