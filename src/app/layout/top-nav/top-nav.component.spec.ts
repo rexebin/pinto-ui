@@ -1,9 +1,18 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { TopNavComponent } from './top-nav.component';
+import { MenuItem } from '../../common/apis/menu-item';
+import { TopNavSubComponent } from '../top-nav-sub/top-nav-sub.component';
+
+const items: MenuItem[] = [
+  { label: 'item1' },
+  {
+    label: 'item2', items: [
+    { label: 'sub-item1' }
+  ]
+  }
+];
 
 describe('TopNavComponent', () => {
   let component: TopNavComponent;
@@ -11,13 +20,17 @@ describe('TopNavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopNavComponent ]
+      declarations: [
+        TopNavComponent,
+        TopNavSubComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TopNavComponent);
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -25,4 +38,5 @@ describe('TopNavComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

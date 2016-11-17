@@ -1,6 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setContainerFluid, setContainer } from './reducer/container.reducer';
+import { MenuItem } from './common/apis/menu-item';
+import { topNavMenuItems } from './layout/top-nav-menu-items';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ import { setContainerFluid, setContainer } from './reducer/container.reducer';
 export class AppComponent implements OnDestroy {
 
   switcher = true;
-
+  topMenuItems: MenuItem[] = topNavMenuItems;
   ngOnDestroy(): void {
 
   }

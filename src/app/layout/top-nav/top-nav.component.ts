@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MenuItem } from '../../common/apis/menu-item';
 
 @Component({
   selector: 'pt-top-nav',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-nav.component.scss']
 })
 export class TopNavComponent implements OnInit {
-
+  @Input() menuItems: MenuItem[] = [];
   constructor() { }
 
   ngOnInit() {

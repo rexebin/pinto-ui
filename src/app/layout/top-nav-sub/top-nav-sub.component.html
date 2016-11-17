@@ -1,0 +1,11 @@
+<li *ngIf="!menuItem.items" class="nav-item mr-1">
+  <a role="button" class="nav-link">{{ menuItem.label }}</a>
+</li>
+<li *ngIf="menuItem.items" class="nav-item dropdown mr-1">
+  <div ngbDropdown>
+    <a role="button" class="nav-link dropdown-toggle" ngbDropdownToggle>{{ menuItem.label }}</a>
+    <div class="dropdown-menu">
+      <a role="button" *ngFor="let subMenu of menuItem.items" class="dropdown-item">{{ subMenu.label }}</a>
+    </div>
+  </div>
+</li>
