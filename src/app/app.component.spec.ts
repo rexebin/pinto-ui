@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { containerReducer } from './reducer/container.reducer';
 import { StoreModule } from '@ngrx/store';
+import { CoreModule } from './core/core.module';
 
 describe('App: PintoUi', () => {
 
@@ -10,7 +11,8 @@ describe('App: PintoUi', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.provideStore({ container: containerReducer }),
-        LayoutModule
+        LayoutModule,
+        CoreModule
       ],
       declarations: [
         AppComponent

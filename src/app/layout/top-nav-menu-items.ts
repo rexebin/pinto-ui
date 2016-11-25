@@ -4,10 +4,10 @@ import { MenuItem } from '../common/apis/menu-item';
 const topNavServiceUser: MenuItem = {
   label: 'Service User',
   items: [
-    {label: 'Service User'},
-    {label: 'Admission'},
-    {label: 'Contact'},
-    {label: 'Setting'}
+    {label: 'Service User', icon: 'fa-user'},
+    {label: 'Admission', icon: 'fa-calendar'},
+    {label: 'Contact', icon:'fa-envelope-o'},
+    {label: 'Setting', icon: 'fa-cog'}
   ]
 };
 

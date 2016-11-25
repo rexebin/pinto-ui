@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { TopNavComponent } from './top-nav.component';
 import { MenuItem } from '../../common/apis/menu-item';
 import { TopNavSubComponent } from '../top-nav-sub/top-nav-sub.component';
+import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 
 const items: MenuItem[] = [
   { label: 'item1' },
