@@ -1,7 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { TopNavSubComponent } from './top-nav-sub.component';
 import { MenuItem } from '../../common/apis/menu-item';
@@ -31,7 +29,7 @@ describe('TopNavSubComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TopNavSubComponent],
-      providers: [{provide: Router, useClass: RouterStub}]
+      providers: [{ provide: Router, useClass: RouterStub }]
     })
       .compileComponents();
   }));
@@ -42,22 +40,24 @@ describe('TopNavSubComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-    expect(component.menuItem).toEqual({});
-  });
-
   describe('Button and dropdown rendering', () => {
 
     it('should render a single link with menuItem\'s label when menuItem has no items', async(() => {
       component.menuItem = menuItemWithoutChildren;
       fixture.detectChanges();
 
-      const el = fixture.nativeElement.querySelectorAll('a');
+      const el = fixture.nativeElement.querySelector('a');
 
-      expect(el.length).toBe(1);
+      expect(el.textContent).toContain(menuItemWithoutChildren.label);
+    }));
 
-      expect(el[0].textContent).toContain(menuItemWithoutChildren.label);
+    it('should not render dropdown when menuItem has no items', async(() => {
+      component.menuItem = menuItemWithoutChildren;
+      fixture.detectChanges();
+
+      const el = fixture.nativeElement.querySelectorAll('[ngbDropdown]');
+
+      expect(el.length).toBe(0);
     }));
 
     it('should render a dropdown when menuItem has items and display labels correctly', async(() => {
@@ -69,7 +69,12 @@ describe('TopNavSubComponent', () => {
       // top level nav label.
       const toggleEl = fixture.nativeElement.querySelector('a[ngbdropdowntoggle]');
       expect(toggleEl.textContent).toContain(menuItemWithChildren.label);
-      // dropdown items's labels.
+    }));
+
+    it('should render sub menus with correct labels', async(() => {
+      component.menuItem = menuItemWithChildren;
+      fixture.detectChanges();
+
       const dropDownMenuEl = fixture.nativeElement.querySelector('div.dropdown-menu');
       const subMenuEls = dropDownMenuEl.querySelectorAll('a');
 
@@ -86,13 +91,13 @@ describe('TopNavSubComponent', () => {
       component.menuItem = menuItemWithoutChildren;
       component.menuItem.icon = 'fa-user';
       fixture.detectChanges();
-      let icon = fixture.nativeElement.querySelector('i.fa.fa-user');
+      let icon = fixture.nativeElement.querySelector('i');
       expect(icon).toHaveCssClass('fa');
       expect(icon).toHaveCssClass('fa-user');
 
       component.menuItem.icon = '';
       fixture.detectChanges();
-      icon = fixture.nativeElement.querySelector('i.fa.fa-user');
+      icon = fixture.nativeElement.querySelector('i');
       expect(icon).toBeFalsy();
 
     }));
@@ -110,19 +115,18 @@ describe('TopNavSubComponent', () => {
       icon = fixture.nativeElement.querySelectorAll('i');
       expect(icon.length).toBe(0);
 
+    }));
+
+    it('should render menu item icons', async(() => {
+      component.menuItem = menuItemWithChildren;
       component.menuItem.items[0].icon = 'fa-user';
       component.menuItem.items[1].icon = 'fa-calendar';
       fixture.detectChanges();
-      icon = fixture.nativeElement.querySelectorAll('i');
+      let icon = fixture.nativeElement.querySelectorAll('i');
+      expect(icon[0]).toHaveCssClass('fa');
       expect(icon[0]).toHaveCssClass('fa-user');
+      expect(icon[1]).toHaveCssClass('fa');
       expect(icon[1]).toHaveCssClass('fa-calendar');
-
-      component.menuItem.items[0].icon = null;
-      fixture.detectChanges();
-      icon = fixture.nativeElement.querySelectorAll('i');
-
-      expect(icon.length).toBe(1);
-      expect(icon[0]).toHaveCssClass('fa-calendar');
     }));
 
   });
@@ -131,16 +135,73 @@ describe('TopNavSubComponent', () => {
     it('should add links if menuItem has one', async(() => {
       component.menuItem = menuItemWithoutChildren;
       let url = 'http://localhost:3000/test';
-      component.menuItem.url= url;
+      component.menuItem.url = url;
       fixture.detectChanges();
+
       let a = fixture.nativeElement.querySelector('a');
       const router = fixture.debugElement.injector.get(Router);
       spyOn(component, 'click').and.callThrough();
       spyOn(router, 'navigateByUrl').and.returnValue(null);
       a.click();
       fixture.detectChanges();
+
       expect(component.click).toHaveBeenCalledWith(component.menuItem);
       expect(router.navigateByUrl).toHaveBeenCalledWith(component.menuItem.url);
+
+    }));
+
+    it('should ignore routerLink if there is a url present.', async(() => {
+      component.menuItem = menuItemWithoutChildren;
+      let url = 'http://localhost:3000/test';
+      component.menuItem.url = url;
+      component.menuItem.routerLink = ['/home'];
+      fixture.detectChanges();
+      let a = fixture.nativeElement.querySelector('a');
+      const router = fixture.debugElement.injector.get(Router);
+      spyOn(component, 'click').and.callThrough();
+      spyOn(router, 'navigateByUrl');
+      spyOn(router, 'navigate');
+      a.click();
+      fixture.detectChanges();
+      expect(router.navigateByUrl).toHaveBeenCalledWith(url);
+      expect(router.navigate).not.toHaveBeenCalled();
+
+    }));
+
+    it('should navigate to routerLink if there is no url', async(() => {
+      component.menuItem = menuItemWithoutChildren;
+      component.menuItem.routerLink = ['/home'];
+
+      component.menuItem.url = null;
+      fixture.detectChanges();
+      let a = fixture.nativeElement.querySelector('a');
+      const router = fixture.debugElement.injector.get(Router);
+      spyOn(component, 'click').and.callThrough();
+      spyOn(router, 'navigateByUrl');
+      spyOn(router, 'navigate');
+      a.click();
+      fixture.detectChanges();
+      expect(router.navigateByUrl).not.toHaveBeenCalled();
+      expect(router.navigate).toHaveBeenCalledWith(component.menuItem.routerLink);
+    }));
+
+    it('should navigate to routerLink if there is no url', async(() => {
+      component.menuItem = menuItemWithoutChildren;
+      component.menuItem.routerLink = null;
+      component.menuItem.url = null;
+      fixture.detectChanges();
+      let a = fixture.nativeElement.querySelector('a');
+      const router = fixture.debugElement.injector.get(Router);
+      spyOn(component, 'click').and.callThrough();
+      spyOn(router, 'navigateByUrl');
+      spyOn(router, 'navigate');
+      a.click();
+      fixture.detectChanges();
+      expect(router.navigateByUrl).not.toHaveBeenCalled();
+      expect(router.navigate).not.toHaveBeenCalled();
     }));
   });
 });
+
+
+
