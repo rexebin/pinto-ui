@@ -131,7 +131,7 @@ describe('TopNavSubComponent', () => {
 
   });
 
-  fdescribe('Menu Links', () => {
+  describe('Menu Links', () => {
     it('should add links if menuItem has one', async(() => {
       component.menuItem = menuItemWithoutChildren;
       let url = 'http://localhost:3000/test';
@@ -185,7 +185,7 @@ describe('TopNavSubComponent', () => {
       expect(router.navigate).toHaveBeenCalledWith(component.menuItem.routerLink);
     }));
 
-    it('should navigate to routerLink if there is no url', async(() => {
+    it('should not navigate to anywhere if there is no url and routerLink', async(() => {
       component.menuItem = menuItemWithoutChildren;
       component.menuItem.routerLink = null;
       component.menuItem.url = null;
@@ -200,6 +200,40 @@ describe('TopNavSubComponent', () => {
       expect(router.navigateByUrl).not.toHaveBeenCalled();
       expect(router.navigate).not.toHaveBeenCalled();
     }));
+  });
+
+  fdescribe('menuItem can be disabled', ()=>{
+
+    describe('menuItem without items', () => {
+      it('should disable the menu if disable is true', async(()=>{
+
+      }));
+
+      it('should enable and disable the menu when toggle menuItem\'s disable property', async(()=>{
+
+      }));
+
+    });
+
+    describe('menuItem with items', () => {
+      it('should disable the menu if disable is true', async(()=>{
+
+      }));
+
+      it('should ignore disable property of the parent if there is items children', async(()=>{
+
+      }));
+
+      it('should disable the sub-menu if sub-menu disable is true', async(()=>{
+
+      }));
+
+      it('should enable and disable the menu when toggle menuItem\'s disable property', async(()=>{
+
+      }));
+
+    });
+
   });
 });
 
