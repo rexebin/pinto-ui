@@ -1,16 +1,14 @@
-/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopNavSubComponent } from './top-nav-sub.component';
 import { MenuItem } from '../../common/apis/menu-item';
 import { Router } from '@angular/router';
 import { RouterStub } from '../../test/mocks/router-stubs';
-import { el } from '@angular/platform-browser/testing/browser_util';
 
 let menuItemWithChildren: MenuItem = {};
 let menuItemWithoutChildren: MenuItem = {};
 
-fdescribe('TopNavSubComponent', () => {
+describe('TopNavSubComponent', () => {
   let component: TopNavSubComponent;
   let fixture: ComponentFixture<TopNavSubComponent>;
   

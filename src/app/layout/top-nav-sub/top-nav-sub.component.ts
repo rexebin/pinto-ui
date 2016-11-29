@@ -9,20 +9,26 @@ import { Router } from '@angular/router';
 })
 export class TopNavSubComponent implements OnInit {
   @Input() menuItem: MenuItem = {};
-  constructor(private router: Router) { }
-
+  
+  constructor(private router: Router) {
+  }
+  
   ngOnInit() {
   }
-
-  click(item: MenuItem){
-    if(item.disabled){
+  
+  click(item: MenuItem) {
+    if (item.disabled) {
       return;
     }
-    if(item.url){
+    if (item.url) {
       this.router.navigateByUrl(item.url);
-    } else if(item.routerLink){
+    } else if (item.routerLink) {
       this.router.navigate(item.routerLink);
     }
+    
+    if (item.url && item.routerLink) {
+      console.warn(`item ${item.label} has url and routerLink, only url will be navigated to.`);
+    }
   }
-
+  
 }
