@@ -4,6 +4,8 @@ import { LayoutModule } from './layout/layout.module';
 import { containerReducer } from './reducer/container.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
+import { Router } from '@angular/router';
+import { RouterStub } from './test/mocks/router-stubs';
 
 describe('App: PintoUi', () => {
 
@@ -16,7 +18,8 @@ describe('App: PintoUi', () => {
       ],
       declarations: [
         AppComponent
-      ]
+      ],
+      providers: [{provide: Router, useClass: RouterStub}]
 
     });
   });

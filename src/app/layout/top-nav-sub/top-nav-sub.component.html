@@ -1,5 +1,5 @@
 <li *ngIf="!menuItem.items" class="nav-item mr-1">
-  <a role="button" class="nav-link" (click)="click(menuItem)">
+  <a role="button" class="nav-link" (click)="click(menuItem)" [ngClass]="{'disabled': menuItem.disabled}">
     <i *ngIf="menuItem.icon" class="fa" [ngClass]="menuItem.icon"></i>
     {{menuItem.label}}
   </a>
@@ -10,7 +10,8 @@
       <i *ngIf="menuItem.icon" class="fa" [ngClass]="menuItem.icon"></i>
       {{ menuItem.label }}</a>
     <div class="dropdown-menu">
-      <a role="button" *ngFor="let subMenu of menuItem.items" class="dropdown-item">
+      <a role="button" *ngFor="let subMenu of menuItem.items" class="dropdown-item"
+         [ngClass]="{'disabled': subMenu.disabled}" (click)="click(subMenu)">
         <i *ngIf="subMenu.icon" class="fa" [ngClass]="subMenu.icon"></i>
         {{ subMenu.label }}
       </a>

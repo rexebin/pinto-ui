@@ -22,7 +22,7 @@ const menuItemWithoutChildren: MenuItem = {
   label: 'item1'
 };
 
-describe('TopNavSubComponent', () => {
+fdescribe('TopNavSubComponent', () => {
   let component: TopNavSubComponent;
   let fixture: ComponentFixture<TopNavSubComponent>;
 
@@ -91,15 +91,15 @@ describe('TopNavSubComponent', () => {
       component.menuItem = menuItemWithoutChildren;
       component.menuItem.icon = 'fa-user';
       fixture.detectChanges();
-      let icon = fixture.nativeElement.querySelector('i');
-      expect(icon).toHaveCssClass('fa');
-      expect(icon).toHaveCssClass('fa-user');
+      let icon = fixture.nativeElement.querySelectorAll('i');
+      expect(icon[0]).toHaveCssClass('fa');
+      expect(icon[0]).toHaveCssClass('fa-user');
 
       component.menuItem.icon = '';
       fixture.detectChanges();
-      icon = fixture.nativeElement.querySelector('i');
-      expect(icon).toBeFalsy();
-
+      icon = fixture.nativeElement.querySelectorAll('i');
+      expect(icon.length).toBe(0);
+      
     }));
 
     it('should render icon if there are icons provided', async(() => {
@@ -122,7 +122,7 @@ describe('TopNavSubComponent', () => {
       component.menuItem.items[0].icon = 'fa-user';
       component.menuItem.items[1].icon = 'fa-calendar';
       fixture.detectChanges();
-      let icon = fixture.nativeElement.querySelectorAll('i');
+      const icon = fixture.nativeElement.querySelectorAll('i');
       expect(icon[0]).toHaveCssClass('fa');
       expect(icon[0]).toHaveCssClass('fa-user');
       expect(icon[1]).toHaveCssClass('fa');
@@ -132,106 +132,230 @@ describe('TopNavSubComponent', () => {
   });
 
   describe('Menu Links', () => {
-    it('should add links if menuItem has one', async(() => {
-      component.menuItem = menuItemWithoutChildren;
-      let url = 'http://localhost:3000/test';
-      component.menuItem.url = url;
-      fixture.detectChanges();
-
-      let a = fixture.nativeElement.querySelector('a');
-      const router = fixture.debugElement.injector.get(Router);
-      spyOn(component, 'click').and.callThrough();
-      spyOn(router, 'navigateByUrl').and.returnValue(null);
-      a.click();
-      fixture.detectChanges();
-
-      expect(component.click).toHaveBeenCalledWith(component.menuItem);
-      expect(router.navigateByUrl).toHaveBeenCalledWith(component.menuItem.url);
-
-    }));
-
-    it('should ignore routerLink if there is a url present.', async(() => {
-      component.menuItem = menuItemWithoutChildren;
-      let url = 'http://localhost:3000/test';
-      component.menuItem.url = url;
-      component.menuItem.routerLink = ['/home'];
-      fixture.detectChanges();
-      let a = fixture.nativeElement.querySelector('a');
-      const router = fixture.debugElement.injector.get(Router);
-      spyOn(component, 'click').and.callThrough();
-      spyOn(router, 'navigateByUrl');
-      spyOn(router, 'navigate');
-      a.click();
-      fixture.detectChanges();
-      expect(router.navigateByUrl).toHaveBeenCalledWith(url);
-      expect(router.navigate).not.toHaveBeenCalled();
-
-    }));
-
-    it('should navigate to routerLink if there is no url', async(() => {
-      component.menuItem = menuItemWithoutChildren;
-      component.menuItem.routerLink = ['/home'];
-
-      component.menuItem.url = null;
-      fixture.detectChanges();
-      let a = fixture.nativeElement.querySelector('a');
-      const router = fixture.debugElement.injector.get(Router);
-      spyOn(component, 'click').and.callThrough();
-      spyOn(router, 'navigateByUrl');
-      spyOn(router, 'navigate');
-      a.click();
-      fixture.detectChanges();
-      expect(router.navigateByUrl).not.toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalledWith(component.menuItem.routerLink);
-    }));
-
-    it('should not navigate to anywhere if there is no url and routerLink', async(() => {
-      component.menuItem = menuItemWithoutChildren;
-      component.menuItem.routerLink = null;
-      component.menuItem.url = null;
-      fixture.detectChanges();
-      let a = fixture.nativeElement.querySelector('a');
-      const router = fixture.debugElement.injector.get(Router);
-      spyOn(component, 'click').and.callThrough();
-      spyOn(router, 'navigateByUrl');
-      spyOn(router, 'navigate');
-      a.click();
-      fixture.detectChanges();
-      expect(router.navigateByUrl).not.toHaveBeenCalled();
-      expect(router.navigate).not.toHaveBeenCalled();
-    }));
+    describe('Menu without children', () => {
+  
+      const url = 'http://localhost:3000/test';
+      let router, el;
+      function init(){
+        component.menuItem = menuItemWithoutChildren;
+        component.menuItem.url = url;
+        fixture.detectChanges();
+        router = fixture.debugElement.injector.get(Router);
+        el = fixture.nativeElement.querySelector('a');
+      }
+      
+      it('should navigate to url menuItem has one', async(() => {
+        init();
+        
+        spyOn(component, 'click').and.callThrough();
+        spyOn(router, 'navigateByUrl').and.returnValue(null);
+        el.click();
+        fixture.detectChanges();
+    
+        expect(component.click).toHaveBeenCalledWith(component.menuItem);
+        expect(router.navigateByUrl).toHaveBeenCalledWith(url);
+    
+      }));
+  
+      it('should ignore routerLink if there is a url present.', async(() => {
+        init();
+        component.menuItem.routerLink = ['/home'];
+        fixture.detectChanges();
+        spyOn(component, 'click').and.callThrough();
+        spyOn(router, 'navigateByUrl');
+        spyOn(router, 'navigate');
+        el.click();
+        fixture.detectChanges();
+        expect(router.navigateByUrl).toHaveBeenCalledWith(url);
+        expect(router.navigate).not.toHaveBeenCalled();
+    
+      }));
+  
+      it('should navigate to routerLink if there is no url', async(() => {
+        init();
+        component.menuItem.routerLink = ['/home'];
+        component.menuItem.url = null;
+        fixture.detectChanges();
+        
+        spyOn(component, 'click').and.callThrough();
+        spyOn(router, 'navigateByUrl');
+        spyOn(router, 'navigate');
+        el.click();
+        fixture.detectChanges();
+        expect(router.navigateByUrl).not.toHaveBeenCalled();
+        expect(router.navigate).toHaveBeenCalledWith(component.menuItem.routerLink);
+      }));
+  
+      it('should not navigate to anywhere if there is no url and routerLink', async(() => {
+        init();
+        component.menuItem.routerLink = null;
+        component.menuItem.url = null;
+        fixture.detectChanges();
+        
+        spyOn(component, 'click').and.callThrough();
+        spyOn(router, 'navigateByUrl');
+        spyOn(router, 'navigate');
+        el.click();
+        fixture.detectChanges();
+        expect(router.navigateByUrl).not.toHaveBeenCalled();
+        expect(router.navigate).not.toHaveBeenCalled();
+      }));
+    });
+    describe('Menu with children', () => {
+      const url = 'http://localhost:3000/test';
+      let router, topEl, subEls;
+      function init(){
+        component.menuItem = menuItemWithChildren;
+        fixture.detectChanges();
+        
+        router = fixture.debugElement.injector.get(Router);
+        
+        spyOn(component, 'click').and.callThrough();
+        spyOn(router, 'navigateByUrl');
+        spyOn(router, 'navigate');
+        
+        topEl = fixture.nativeElement.querySelector('a.dropdown-toggle');
+        subEls = fixture.nativeElement.querySelectorAll('a.dropdown-item');
+      }
+      
+      beforeEach(()=>{
+        init();
+      });
+  
+      it('should ignore url or menuItem on the parent', async(() => {
+        component.menuItem.url = url;
+        fixture.detectChanges();
+        
+        topEl.click();
+  
+        fixture.detectChanges();
+        
+        expect(component.click).not.toHaveBeenCalled();
+        
+      }));
+  
+      it('should navigate when clicking sub-menu with url or routerLink', async(() => {
+        component.menuItem.items[0].url = url;
+        fixture.detectChanges();
+        
+        subEls[0].click();
+        fixture.detectChanges();
+        
+        expect(component.click).toHaveBeenCalledWith(component.menuItem.items[0])
+        expect(router.navigateByUrl).toHaveBeenCalledWith(url);
+        
+        component.menuItem.items[0].url = null;
+        component.menuItem.items[0].routerLink = ['./home'];
+        fixture.detectChanges();
+        
+        subEls[0].click();
+        fixture.detectChanges();
+  
+        expect(component.click).toHaveBeenCalledWith(component.menuItem.items[0]);
+        expect(router.navigate).toHaveBeenCalledWith(['./home']);
+      }));
+  
+      it('should ignore routerLink if url is present', async(() => {
+        component.menuItem.items[0].url = url;
+        component.menuItem.items[0].routerLink = ['./home'];
+        fixture.detectChanges();
+  
+        subEls[0].click();
+        fixture.detectChanges();
+  
+        expect(component.click).toHaveBeenCalledWith(component.menuItem.items[0]);
+        expect(router.navigateByUrl).toHaveBeenCalledWith(url);
+        expect(router.navigate).not.toHaveBeenCalledWith(['./home']);
+      }));
+  
+      it('should navigate to anywhere if there is no url or routerLink', async(() => {
+        subEls[0].click();
+        fixture.detectChanges();
+        
+        expect(component.click).toHaveBeenCalledWith(component.menuItem.items[0]);
+        console.log(component.menuItem);
+        expect(router.navigateByUrl).not.toHaveBeenCalled();
+        expect(router.navigate).not.toHaveBeenCalled();
+      }));
+      
+    });
   });
 
-  fdescribe('menuItem can be disabled', ()=>{
+  describe('menuItem can be disabled', () => {
 
     describe('menuItem without items', () => {
-      it('should disable the menu if disable is true', async(()=>{
+      it('should disable the menu if disable is true and it toggles', async(() => {
+  
+        component.menuItem = menuItemWithoutChildren;
+        component.menuItem.disabled = true;
+        fixture.detectChanges();
+        const a = fixture.nativeElement.querySelector('a');
+        expect(a).toHaveCssClass('disabled');
+  
+        component.menuItem.disabled = null;
+        fixture.detectChanges();
+  
+        expect(a).not.toHaveCssClass('disabled');
 
       }));
 
-      it('should enable and disable the menu when toggle menuItem\'s disable property', async(()=>{
+      it('should prevent click event if disabled is true', async(() => {
+
+        component.menuItem = menuItemWithoutChildren;
+        component.menuItem.disabled = true;
+        component.menuItem.url = 'localhost:3000';
+        fixture.detectChanges();
+        const router = fixture.debugElement.injector.get(Router);
+        spyOn(component, 'click').and.callThrough();
+        spyOn(router, 'navigateByUrl');
+        const a = fixture.nativeElement.querySelector('a');
+        a.click();
+        fixture.detectChanges();
+
+        expect(component.click).toHaveBeenCalled();
+        expect(router.navigateByUrl).not.toHaveBeenCalled();
 
       }));
 
     });
 
     describe('menuItem with items', () => {
-      it('should disable the menu if disable is true', async(()=>{
-
+     
+      it('should ignore disable property of the parent if there is items children', async(() => {
+        component.menuItem = menuItemWithChildren;
+        component.menuItem.disabled = true;
+  
+        fixture.detectChanges();
+        
+        const a = fixture.nativeElement.querySelector('a.dropdown-toggle');
+        expect(a).not.toHaveCssClass('disabled');
+        
       }));
-
-      it('should ignore disable property of the parent if there is items children', async(()=>{
-
+  
+      it('should disable the sub-menu if disable is true and toggles', async(() => {
+        component.menuItem = menuItemWithChildren;
+        component.menuItem.items[0].disabled = true;
+        fixture.detectChanges();
+        
+        const a = fixture.nativeElement.querySelectorAll('a.dropdown-item');
+        
+        expect(a[0]).toHaveCssClass('disabled');
+        expect(a[1]).not.toHaveCssClass('disabled');
+        
+        component.menuItem.items[0].disabled = false;
+        component.menuItem.items[1].disabled = true;
+  
+        fixture.detectChanges();
+  
+        expect(a[0]).not.toHaveCssClass('disabled');
+        expect(a[1]).toHaveCssClass('disabled');
+    
       }));
-
-      it('should disable the sub-menu if sub-menu disable is true', async(()=>{
-
+  
+      it('should prevent click event if sub-menu is disabled', async(() => {
+        
       }));
-
-      it('should enable and disable the menu when toggle menuItem\'s disable property', async(()=>{
-
-      }));
-
+      
     });
 
   });

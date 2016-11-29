@@ -15,6 +15,9 @@ export class TopNavSubComponent implements OnInit {
   }
 
   click(item: MenuItem){
+    if(item.disabled){
+      return;
+    }
     if(item.url){
       this.router.navigateByUrl(item.url);
     } else if(item.routerLink){
