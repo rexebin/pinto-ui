@@ -8,16 +8,18 @@ import { FormModule } from './form/form.module';
 import { LayoutModule } from './layout/layout.module';
 
 import './rxjs-extensions';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
     declarations: [
-        AppComponent,
+        AppComponent
 
     ],
     imports: [
         BrowserModule,
         HttpModule,
         CoreModule.forRoot(),
+        AppRoutingModule,
         FormModule,
         LayoutModule,
     ],

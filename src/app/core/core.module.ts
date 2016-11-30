@@ -1,7 +1,8 @@
-import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import { NgbModule, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { StoreModule } from '@ngrx/store';
-import { containerReducer } from '../reducer/container.reducer';
+import {NgModule, ModuleWithProviders, SkipSelf, Optional} from '@angular/core';
+import {NgbModule, NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
+import {StoreModule} from '@ngrx/store';
+import {containerReducer} from '../reducer/container.reducer';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 /**
  * CoreModule should be providers only module, a single place to host root providers.
@@ -12,8 +13,13 @@ import { containerReducer } from '../reducer/container.reducer';
     NgbModule.forRoot(),
     StoreModule.provideStore({container: containerReducer})
   ],
-  exports: [NgbModule, StoreModule],
-  providers: []
+  exports: [
+    NgbModule,
+    StoreModule,
+    DashboardComponent
+  ],
+  providers: [],
+  declarations: [DashboardComponent],
 })
 
 export class CoreModule {
