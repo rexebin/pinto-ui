@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { ServiceUserComponent } from './service-user.component';
+import { ServiceUserManagerComponent } from './service-user-manager.component';
 import { SharedModule } from "../shared/shared.module";
 import { CurrentOccupancyComponent } from './current-occupancy/current-occupancy.component';
-import { ServiceUserRoutingModule } from "./service-user-routing.module";
+import { ServiceUserManagerRoutingModule } from "./service-user-manager-routing.module";
 
 @NgModule({
   imports: [
     SharedModule,
-    ServiceUserRoutingModule
+    ServiceUserManagerRoutingModule
   ],
   declarations: [
-    ServiceUserComponent,
+    ServiceUserManagerComponent,
     CurrentOccupancyComponent
   ]
 })
-export class ServiceUserModule {
+export class ServiceUserManagerModule {
 }
