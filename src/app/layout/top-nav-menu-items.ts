@@ -13,7 +13,7 @@ const topNavServiceUser: MenuItem = {
 const topNavFinance: MenuItem = {
   label: 'Finance',
   items: [
-    {label: 'Supplier'},
+    {label: 'Supplier' , icon: 'fa-user', url: '/service-user'},
     {label: 'Customer'},
     {label: 'Bank'},
     {label: 'Invoice'},

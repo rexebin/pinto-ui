@@ -5,7 +5,7 @@ import {NgModule} from "@angular/core";
 const routes: Route[] = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'su-manager', loadChildren: './service-user/service-user-manager.module#ServiceUserManagerModule'},
+  {path: 'service-user', loadChildren: './service-user/service-user-manager.module#ServiceUserManagerModule'},
 ];
 
 @NgModule({
