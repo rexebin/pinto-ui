@@ -1,8 +1,8 @@
-import {NgModule, ModuleWithProviders, SkipSelf, Optional} from '@angular/core';
-import {NgbModule, NgbDropdownConfig} from '@ng-bootstrap/ng-bootstrap';
-import {StoreModule} from '@ngrx/store';
-import {containerReducer} from '../reducer/container.reducer';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
+import { NgbModule, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { containerReducer } from '../reducer/container.reducer';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 /**
  * CoreModule should be providers only module, a single place to host root providers.
@@ -11,7 +11,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 @NgModule({
   imports: [
     NgbModule.forRoot(),
-    StoreModule.provideStore({container: containerReducer})
+    StoreModule.provideStore({ container: containerReducer })
   ],
   exports: [
     NgbModule,
@@ -23,7 +23,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 })
 
 export class CoreModule {
-
+  
   // Prevent core module to be imported in modules other than the root AppModule.
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
@@ -31,13 +31,13 @@ export class CoreModule {
         'CoreModule is already loaded. Import it in the AppModule only');
     }
   }
-
+  
   // allow AppModule to pass parameters to setup provider customisation.
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
       providers: [
-
+        
         //{provide: UserServiceConfig, useValue: config }
       ]
     };

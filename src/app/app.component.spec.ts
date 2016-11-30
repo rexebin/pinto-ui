@@ -5,7 +5,7 @@ import { containerReducer } from './reducer/container.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
 import { Router } from '@angular/router';
-import { RouterStub } from './test/mocks/router-stubs';
+import { RouterStub, RouterOutletStubComponent } from './test/mocks/router-stubs';
 
 describe('App: PintoUi', () => {
 
@@ -17,7 +17,7 @@ describe('App: PintoUi', () => {
         CoreModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, RouterOutletStubComponent
       ],
       providers: [{provide: Router, useClass: RouterStub}]
 

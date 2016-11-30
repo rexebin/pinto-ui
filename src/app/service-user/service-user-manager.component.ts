@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['service-user-manager.component.scss']
 })
 export class ServiceUserManagerComponent implements OnInit {
-
-  constructor() { }
-
+  
+  constructor() {
+  }
+  
   ngOnInit() {
   }
-
+  
 }
