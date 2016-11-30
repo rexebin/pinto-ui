@@ -32,5 +32,40 @@ app-routing.module.ts:
  * `/serviceuser`
  * `/finance`
  * `/hr`
+ * `/settings`
  
- 
+### DashboardComponent
+
+Dashboard is the home page of the app. 
+
+From dashboard, user can go to dashboards for feature area. 
+
+### Common Module
+
+1. room
+1. careCategory
+1. fee
+
+### Public Service Module
+1. localAuthority
+1. socialWorker
+1. surgery
+1. gp
+
+### Service User Module
+
+1. has its own root component: ServiceUserComponent
+1. default component: CurrentOccupancyComponent
+1. model:
+  * serviceUser
+  * admission
+  * nextOfKin
+1. CRUD:
+  * master/detail screen for list and edit
+  * delete marks deleted field for undo purpose
+
+  
+
+
+
+
