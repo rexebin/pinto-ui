@@ -4,16 +4,17 @@ import { ServiceUserEditComponent } from './service-user-edit/service-user-edit.
 import { ServiceUserDetailComponent } from './service-user-detail/service-user-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MasterDetailComponent } from '../../shared/master-detail/master-detail.component';
 
 const routes: Routes = [
   
   {
     path: '',
-    redirectTo: 'list',
+    component: MasterDetailComponent,
     children: [
-      { path: 'list', component: ServiceUserListComponent },
-      { path: 'edit', component: ServiceUserEditComponent },
-      { path: 'detail', component: ServiceUserDetailComponent }
+      { path: '', component: ServiceUserListComponent },
+      { path: '/:id', component: ServiceUserDetailComponent },
+      { path: 'edit/:id', component: ServiceUserEditComponent }
     ]
   },
 
