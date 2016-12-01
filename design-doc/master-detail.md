@@ -71,6 +71,7 @@ EditComponent should only worry about add/edit screen, assuming item is resolved
 
 ## MasterDetailComponent
 
+MasterDetailComponent is in shared module and it will be used for all master/detail screens.
 MasterDetailComponent is a dummy component, its template has two router-outlet, one for list, one for detail/edit.
 MasterDetailComponent control how each router-outlet should be displayed:
 
@@ -87,5 +88,10 @@ MasterDetailComponent control how each router-outlet should be displayed:
     * detail/edit view is full width
     * "back to list" button become visible
     
-
+1. edit view on mobile
+    * on mobile, detail view doesn't show an "edit" button 
+    * list doesn't show "add" button on mobile
+    * user can get edit view with url, the app does not stop user from using edit view on mobile, if they really wanted to.
+    * detail and edit share the same router-outlet
+    
 
