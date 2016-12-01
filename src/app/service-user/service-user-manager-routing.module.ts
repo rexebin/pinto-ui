@@ -4,10 +4,12 @@ import { CurrentOccupancyComponent } from "./current-occupancy/current-occupancy
 
 const routes: Routes = [
   { path: '', component: CurrentOccupancyComponent },
+  { path: 'service-user', loadChildren: './service-user/service-user.module#ServiceUserModule' }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ServiceUserManagerRoutingModule { }
+export class ServiceUserManagerRoutingModule {
+}
