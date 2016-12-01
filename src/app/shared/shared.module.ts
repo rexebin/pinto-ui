@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MasterDetailComponent } from './master-detail/master-detail.component';
 
 /**
  * SharedModule should not have providers. Setup root providers in CoreModule.
@@ -12,11 +13,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     NgbModule
   ],
-  exports:[
-    NgbModule, CommonModule
+  exports: [
+    NgbModule,
+    CommonModule,
+    MasterDetailComponent
   ],
-  declarations: []
+  declarations: [MasterDetailComponent]
 })
-export class SharedModule { }
+export class SharedModule {
+}
 
 
