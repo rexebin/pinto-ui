@@ -1,16 +1,18 @@
-<p>
+<div>
   master-detail works!
-  <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:['edit', 1]}}]">
-    edit with list
-  </button>
-  <button class="btn btn-primary"  [routerLink]="[{ outlets: { detail:['detail', 1],list:null }}]">
-    detail with no list
-  </button>
+  <div>
+    <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:['edit', 1]}}]">
+      Edit with list
+    </button>
+    <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:['detail', 1],list:null }}]">
+      Detail without list
+    </button>
 
-  <button class="btn btn-primary"  [routerLink]="[{ outlets: { detail:null, list:['list'] }}]">
-    list
-  </button>
-  <router-outlet name="list"></router-outlet>
-  <router-outlet name="detail"></router-outlet>
+    <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:null, list:['list'] }}]">
+      List
+    </button>
+    <router-outlet name="list"></router-outlet>
+    <router-outlet name="detail"></router-outlet>
+  </div>
 
-</p>
+</div>
