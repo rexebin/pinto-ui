@@ -16,22 +16,22 @@ const routes: Routes = [
     component: MasterDetailComponent,
     children: [
       {
-        path: 'list',
+        path: '',
         component: ServiceUserListComponent,
         resolve: [ServiceUserListResolveService],
         outlet: 'list'
       },
       {
-        path: ':id',
+        path: 'detail/:id',
         component: ServiceUserDetailComponent,
         resolve: [ServiceUserDetailResolveService],
         outlet: 'detail'
       },
       {
-        path: ':id',
+        path: 'edit/:id',
         component: ServiceUserEditComponent,
         resolve: [ServiceUserEditResolveService],
-        outlet: 'edit'
+        outlet: 'detail'
       }
     ]
   },
