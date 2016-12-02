@@ -13,7 +13,7 @@ export class MasterDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.navigate(['/service-user/service-user/master-detail', { outlets: { detail:null, list:['list'] }}]);
+    this.router.navigate([{ outlets: { detail:null, list:['list'] }}], { relativeTo: this.activeRoute });
   }
 
 }
