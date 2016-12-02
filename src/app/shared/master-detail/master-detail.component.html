@@ -1,9 +1,17 @@
 <p>
   master-detail works!
-  <a [routerLink]="[{ outlets: { list: ['list'], edit:['edit'] }}]">
+  <a [routerLink]="[{ outlets: { edit:['1'], detail: null, list:['list'] }}]">
     edit
+  </a>
+  <a [routerLink]="[{ outlets: { detail:['1'], edit: null, list:['list'] }}]">
+    detail
+  </a>
+
+  <a [routerLink]="[{ outlets: { detail:null, edit: null, list:['list'] }}]">
+    list
   </a>
   <router-outlet name="list"></router-outlet>
   <router-outlet name="detail"></router-outlet>
   <router-outlet name="edit"></router-outlet>
+
 </p>

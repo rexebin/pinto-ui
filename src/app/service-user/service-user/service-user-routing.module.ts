@@ -10,8 +10,9 @@ import { ServiceUserListResolveService } from '../resolver/service-user-list-res
 import { ServiceUserEditResolveService } from '../resolver/service-user-edit-resolve.service';
 
 const routes: Routes = [
+  {path: '', pathMatch: 'full', redirectTo: 'master-detail'},
   {
-    path: 'service-user',
+    path: 'master-detail',
     component: MasterDetailComponent,
     children: [
       {
@@ -27,7 +28,7 @@ const routes: Routes = [
         outlet: 'detail'
       },
       {
-        path: 'edit',
+        path: ':id',
         component: ServiceUserEditComponent,
         resolve: [ServiceUserEditResolveService],
         outlet: 'edit'
