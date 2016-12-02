@@ -1,7 +1,7 @@
 <div>
   master-detail works!
   <div>
-    <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:['edit', 1]}}]">
+    <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:['edit', 1], list: ['list']}}]">
       Edit with list
     </button>
     <button class="btn btn-primary" [routerLink]="[{ outlets: { detail:['detail', 1],list:null }}]">
