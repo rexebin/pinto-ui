@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'pt-master-detail',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MasterDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private activeRoute: ActivatedRoute) {
+    
+  }
 
   ngOnInit() {
+    this.router.navigate(['/service-user/service-user/master-detail', { outlets: { detail:null, list:['list'] }}]);
   }
 
 }

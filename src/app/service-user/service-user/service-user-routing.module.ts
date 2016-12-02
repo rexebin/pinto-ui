@@ -16,7 +16,7 @@ const routes: Routes = [
     component: MasterDetailComponent,
     children: [
       {
-        path: '',
+        path: 'list',
         component: ServiceUserListComponent,
         resolve: [ServiceUserListResolveService],
         outlet: 'list'
