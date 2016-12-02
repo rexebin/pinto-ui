@@ -3,11 +3,13 @@ import { ServiceUserManagerComponent } from './service-user-manager.component';
 import { SharedModule } from "../shared/shared.module";
 import { CurrentOccupancyComponent } from './current-occupancy/current-occupancy.component';
 import { ServiceUserManagerRoutingModule } from "./service-user-manager-routing.module";
+import { ServiceUserModule } from './service-user/service-user.module';
 
 @NgModule({
   imports: [
     SharedModule,
-    ServiceUserManagerRoutingModule
+    ServiceUserManagerRoutingModule,
+    ServiceUserModule
   ],
   declarations: [
     ServiceUserManagerComponent,
