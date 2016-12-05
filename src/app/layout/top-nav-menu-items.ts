@@ -5,7 +5,7 @@ const topNavServiceUser: MenuItem = {
   label: 'Service User',
   items: [
     {label: 'Current Occupancy', icon: 'fa-calendar'},
-    {label: 'Service User', icon: 'fa-user', routerLink: ['./service-user']},
+    {label: 'Service User', icon: 'fa-user', routerLink: ['/service-user/service-user/master-detail', {outlets: {list: ['list']}}]},
     {label: 'Admission', icon: 'fa-calendar'}
   ]
 };
