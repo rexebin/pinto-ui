@@ -33,7 +33,7 @@ Behavior:
     * list view has pagination
     * click item move list view to the left and show details on the right, also make screen full width
 
-1. `entity-name/:id`:
+1. `entity-name/detail/:id`:
     * list view on the side, detail view on the right. 
     * detail view has "edit" button to go to edit screen.  
     * list view is hidden on mobile. 
@@ -45,14 +45,14 @@ Behavior:
     * list view on the side, edit view on the right.
     * when `id` is `-1`, create new entity. 
     * user click "add" button on the list view to create new entity by navigate to `entity-name/edit/-1`
-    * successful save navigates back to `entity-name/:id`
+    * successful save navigates back to `entity-name/detail/:id`
     * on mobile, edit is not available. No "add" button on list view. No "edit" button on detail view. 
 
 ## Route configurations
 parent route is empty path and MasterDetailComponent, with child routes:
-    * `''`, ListComponent
-    * `'/:id'`, DetailComponent, outlet: 'detailEdit'
-    * `'edit/:id'`, EditComponent, outlet: 'detailEdit'
+    * `'list'`, ListComponent, outlet: 'list'
+    * `'detail/:id'`, DetailComponent, outlet: 'detail'
+    * `'edit/:id'`, EditComponent, outlet: 'detail'
     
 # Component Responsibilities
   
