@@ -8,27 +8,30 @@ import {
 } from '../../test/mocks/router-stubs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-describe('MasterDetailComponent', () => {
+fdescribe('MasterDetailComponent', () => {
   let component: MasterDetailComponent;
   let fixture: ComponentFixture<MasterDetailComponent>;
-
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MasterDetailComponent, RouterLinkStubDirective, RouterOutletStubComponent],
+      declarations: [
+        MasterDetailComponent,
+        RouterLinkStubDirective,
+        RouterOutletStubComponent
+      ],
       providers: [
-        {provide: Router, useClass: RouterStub},
-        {provide: ActivatedRoute, useClass: ActivatedRouteStub}
+        { provide: Router, useClass: RouterStub },
+        { provide: ActivatedRoute, useClass: ActivatedRouteStub }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
-
   beforeEach(() => {
     fixture = TestBed.createComponent(MasterDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
+  
   it('should create', () => {
     expect(component).toBeTruthy();
   });
