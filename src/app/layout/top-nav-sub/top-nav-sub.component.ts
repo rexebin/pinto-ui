@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuItem } from '../../common/apis/menu-item';
+
 import { Router } from '@angular/router';
+import { MenuItem } from '../../common/apis/menu-item';
 
 @Component({
   selector: 'pt-top-nav-sub',

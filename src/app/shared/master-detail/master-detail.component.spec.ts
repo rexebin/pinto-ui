@@ -1,9 +1,12 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 import { MasterDetailComponent } from './master-detail.component';
+import {
+  RouterLinkStubDirective, RouterOutletStubComponent, RouterStub,
+  ActivatedRouteStub
+} from '../../test/mocks/router-stubs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 describe('MasterDetailComponent', () => {
   let component: MasterDetailComponent;
@@ -11,7 +14,11 @@ describe('MasterDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MasterDetailComponent ]
+      declarations: [ MasterDetailComponent, RouterLinkStubDirective, RouterOutletStubComponent],
+      providers: [
+        {provide: Router, useClass: RouterStub},
+        {provide: ActivatedRoute, useClass: ActivatedRouteStub}
+      ]
     })
     .compileComponents();
   }));

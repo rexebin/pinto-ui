@@ -1,11 +1,11 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, getTestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { containerReducer } from './reducer/container.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
 import { Router } from '@angular/router';
-import { RouterStub, RouterOutletStubComponent } from './test/mocks/router-stubs';
+import { RouterStub, RouterOutletStubComponent, RouterLinkStubDirective } from './test/mocks/router-stubs';
 
 describe('App: PintoUi', () => {
 
@@ -17,40 +17,41 @@ describe('App: PintoUi', () => {
         CoreModule
       ],
       declarations: [
-        AppComponent, RouterOutletStubComponent
+        AppComponent, RouterOutletStubComponent, RouterLinkStubDirective
       ],
       providers: [{provide: Router, useClass: RouterStub}]
 
     });
   });
+  let component, fixture;
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.debugElement.componentInstance;
+    
+  });
 
   it('should create the app', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  
+    expect(component).toBeTruthy();
   }));
 
   it(`should have as title 'app works!'`, async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
+  
+    expect(component.title).toEqual('app works!');
   }));
 
 
   it('should switch setContainer classes when clicking toggle button', async(() => {
-    let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let el = fixture.nativeElement.querySelector('button');
-    expect(el).toHaveCssClass('btn');
+   
     let containerDivs = fixture.nativeElement.querySelectorAll('div[ptContainerSwitcher]');
 
-    el.click();
+    component.togglePageWidth();
     fixture.detectChanges();
     containerDivs.forEach(div => {
       expect(div).toHaveCssClass('container-fluid');
     });
-
-    el.click();
+  
+    component.togglePageWidth();
     fixture.detectChanges();
     containerDivs.forEach(div => {
       expect(div).toHaveCssClass('container');
