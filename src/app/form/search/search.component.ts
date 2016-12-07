@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   onClick() {
-    this.search.emit(this.searchControl.value);
+    // this.search.emit(this.searchControl.);
   }
 
   onKeyUp(code: string) {

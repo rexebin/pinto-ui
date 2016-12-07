@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
-import {SearchComponent} from './search.component';
-import {By} from "@angular/platform-browser";
-import {ReactiveFormsModule} from "@angular/forms";
+import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { SearchComponent } from './search.component';
+import { By } from "@angular/platform-browser";
+import { ReactiveFormsModule } from "@angular/forms";
 
 fdescribe('SearchComponent', () => {
   let component: SearchComponent;
@@ -44,6 +44,7 @@ fdescribe('SearchComponent', () => {
   }));
 
   it('should clear search text hitting esc key', async(() => {
+
 
   }));
 
