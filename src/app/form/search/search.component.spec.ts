@@ -2,6 +2,7 @@
 import {async, ComponentFixture, TestBed, fakeAsync, tick} from '@angular/core/testing';
 import {SearchComponent} from './search.component';
 import {By} from "@angular/platform-browser";
+import {ReactiveFormsModule} from "@angular/forms";
 
 fdescribe('SearchComponent', () => {
   let component: SearchComponent;
@@ -11,7 +12,8 @@ fdescribe('SearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchComponent]
+      declarations: [SearchComponent],
+      imports: [ReactiveFormsModule]
     })
       .compileComponents();
   }));
@@ -21,7 +23,6 @@ fdescribe('SearchComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     inputEl = fixture.debugElement.query(By.css('input')).nativeElement;
-    spySearchEvent = spyOn(component, 'search');
   });
 
   it('should create', () => {
@@ -29,19 +30,24 @@ fdescribe('SearchComponent', () => {
   });
 
   it('should emit search event after each keystroke, debouncing 500ms', fakeAsync(() => {
-    inputEl.value = 'hello!';
+    const expected = 'hello!';
+    let emittedValue = '';
+    let sub = component.search.subscribe(value => emittedValue = value);
+    inputEl.value = expected;
+    inputEl.dispatchEvent(new Event('input'));
     fixture.detectChanges();
-    expect(component.search).not.toHaveBeenCalled();
+    expect(emittedValue).toBe('');
     tick(500);
     fixture.detectChanges();
-    expect(component.search).toHaveBeenCalledWith(inputEl.value);
+    expect(emittedValue).toBe(expected);
+    sub.unsubscribe();
   }));
 
   it('should clear search text hitting esc key', async(() => {
 
   }));
 
-  it('should emit search event when clicking search button', async(() => {
+  it('should emit search event without debouncing when clicking search button', async(() => {
 
   }));
 

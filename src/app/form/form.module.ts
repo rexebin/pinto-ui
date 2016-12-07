@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import {SearchComponent} from "./search/search.component";
 
 /**
  * FormModule is to hold all common form related components, directive and pipes.
@@ -10,12 +11,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   exports: [
-    FormsModule
+    ReactiveFormsModule
   ],
-  declarations: []
+  declarations: [SearchComponent]
 })
 
 export class FormModule {
