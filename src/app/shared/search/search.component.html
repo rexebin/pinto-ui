@@ -1,0 +1,10 @@
+<form class="form-inline" [formGroup]="form">
+  <div class="form-group">
+    <label class="sr-only" for="searchBox">Search</label>
+    <div class="input-group">
+      <input type="text" class="form-control" id="searchBox" placeholder="Amount">
+      <div class="input-group-addon" (click)="search()"><i class="fa fa-search"></i></div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Transfer cash</button>
+</form>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MasterDetailComponent } from './master-detail/master-detail.component';
 import { RouterModule } from '@angular/router';
+import { SearchComponent } from './search/search.component';
 
 /**
  * SharedModule should not have providers. Setup root providers in CoreModule.
@@ -20,7 +21,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     MasterDetailComponent
   ],
-  declarations: [MasterDetailComponent]
+  declarations: [MasterDetailComponent, SearchComponent]
 })
 export class SharedModule {
 }

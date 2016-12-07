@@ -8,10 +8,10 @@ import {
 } from '../../test/mocks/router-stubs';
 import { Router, ActivatedRoute } from '@angular/router';
 
-fdescribe('MasterDetailComponent', () => {
+describe('MasterDetailComponent', () => {
   let component: MasterDetailComponent;
   let fixture: ComponentFixture<MasterDetailComponent>;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -31,7 +31,7 @@ fdescribe('MasterDetailComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });

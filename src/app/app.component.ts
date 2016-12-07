@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { setContainerFluid, setContainer } from './reducer/container.reducer';
 import { MenuItem } from './common/apis/menu-item';
 import { topNavMenuItems } from './layout/top-nav-menu-items';
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,8 @@ export class AppComponent implements OnDestroy {
 
   title = 'app works!';
 
-  constructor(private store: Store<any>) {
-    
+  constructor(private store: Store<any>, private http: Http) {
+
   }
 
   togglePageWidth() {
