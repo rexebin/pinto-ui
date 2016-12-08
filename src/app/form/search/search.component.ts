@@ -8,22 +8,16 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
   
   @Output() search = new EventEmitter<string>();
   @Input() debounce = 1000;
   
-  constructor() {
-  }
-  
-  previousValue: string;
   searchControl = new FormControl('');
-  sub: Subscription;
+  _subscription: Subscription;
+  _previousValue: string;
   
   ngOnInit() {
-    this.sub = this.searchControl.valueChanges.debounceTime(this.debounce).subscribe(value => {
+    this._subscription = this.searchControl.valueChanges.debounceTime(this.debounce).subscribe(value => {
       this._search(value);
     });
   }
@@ -42,11 +36,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
   
+  ngOnDestroy(): void {
+    this._subscription.unsubscribe();
+  }
+    
   _search(value: string) {
     let trimmedValue = value.trim();
-    if (this.previousValue !== trimmedValue) {
+    if (this._previousValue !== trimmedValue) {
       this.search.emit(trimmedValue);
-      this.previousValue = trimmedValue;
+      this._previousValue = trimmedValue;
     }
   }
   
