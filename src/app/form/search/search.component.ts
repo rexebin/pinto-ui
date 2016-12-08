@@ -28,12 +28,16 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   onClick() {
-    // this.search.emit(this.searchControl.);
+    this.search.emit(this.searchControl.value);
   }
 
   onKeyUp(code: string) {
     if (code === 'Escape') {
       this.searchControl.setValue('');
+    }
+    
+    if(code === 'Enter'){
+      this.search.emit(this.searchControl.value);
     }
   }
 

@@ -3,7 +3,7 @@
     <label class="sr-only" for="searchBox">Search</label>
     <div class="input-group">
       <input type="text" class="form-control" id="searchBox" placeholder="Search"
-             [formControl]="searchControl" (keyup)="onKeyUp($event.code)">
+             [formControl]="searchControl" (keyup)="onKeyUp($event.keyCode)">
       <div class="input-group-addon" (click)="onClick()"><i class="fa fa-search"></i></div>
     </div>
   </div>
