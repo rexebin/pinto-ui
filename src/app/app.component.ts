@@ -20,7 +20,7 @@ export class AppComponent implements OnDestroy {
 
   title = 'app works!';
 
-  constructor(private store: Store<any>, private http: Http) {
+  constructor(private store: Store<any>) {
 
   }
 

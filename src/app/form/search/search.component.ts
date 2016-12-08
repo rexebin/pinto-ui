@@ -37,9 +37,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
   
   ngOnDestroy(): void {
-    this._subscription.unsubscribe();
+    if (this._subscription) {
+      this._subscription.unsubscribe();
+    }
   }
-    
+  
   _search(value: string) {
     let trimmedValue = value.trim();
     if (this._previousValue !== trimmedValue) {

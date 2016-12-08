@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
 import { Router } from '@angular/router';
 import { RouterStub, RouterOutletStubComponent, RouterLinkStubDirective } from './test/mocks/router-stubs';
+import { FormModule } from './form/form.module';
 
 describe('App: PintoUi', () => {
   
@@ -14,7 +15,8 @@ describe('App: PintoUi', () => {
       imports: [
         StoreModule.provideStore({ container: containerReducer }),
         LayoutModule,
-        CoreModule
+        CoreModule,
+        FormModule
       ],
       declarations: [
         AppComponent,

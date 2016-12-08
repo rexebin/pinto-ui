@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { DebugElement, Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-fdescribe('SearchComponent Isolated', () => {
+describe('SearchComponent Isolated', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let inputDebugElement: DebugElement, inputNativeElement: HTMLInputElement;
@@ -138,7 +138,7 @@ fdescribe('SearchComponent Isolated', () => {
   
 });
 
-fdescribe('Search Component in test component', () => {
+describe('Search Component in test component', () => {
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
   let inputDebugElement: DebugElement, inputNativeElement: HTMLInputElement;
