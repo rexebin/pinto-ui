@@ -54,7 +54,7 @@ fdescribe('SearchComponent Isolated', () => {
     inputNativeElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     spyOn(component, 'onKeyUp').and.callThrough();
-    inputDebugElement.triggerEventHandler('keyup', {key: 'Escape'});
+    inputDebugElement.triggerEventHandler('keyup', { key: 'Escape' });
     fixture.detectChanges();
     expect(component.onKeyUp).toHaveBeenCalledWith('Escape');
     expect(inputNativeElement.value).toBe('');
@@ -76,7 +76,7 @@ fdescribe('SearchComponent Isolated', () => {
     inputNativeElement.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     expect(emittedValue).toBe('');
-    inputDebugElement.triggerEventHandler('keyup', {key: 'Enter'});
+    inputDebugElement.triggerEventHandler('keyup', { key: 'Enter' });
     fixture.detectChanges();
     expect(emittedValue).toBe(expectedValue);
   });
@@ -146,7 +146,10 @@ fdescribe('Search Component in test component', () => {
   
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SearchComponent, TestComponent],
+      declarations: [
+        SearchComponent,
+        TestComponent
+      ],
       imports: [ReactiveFormsModule]
     })
       .compileComponents();
