@@ -16,6 +16,7 @@ Client side search does have these features:
 1. respect pagination and sort preferences
 1. esc key remove search box
 1. enter start search immediately without debounce.
+1. click search icon immediately search without debounce.
 
 ### Appearance
 
