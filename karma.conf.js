@@ -46,9 +46,15 @@ module.exports = function (config) {
       ChromeBackground: {
         base: 'ChromeCanary',
         flags: ['--disable-background-timer-throttling']
+      },
+      FirefoxLowTimeout: {
+        base: 'Firefox',
+        prefs: {
+          'dom.min_background_timeout_value': 5
+        }
       }
     },
-    browsers: ['ChromeBackground'],
+    browsers: ['FirefoxLowTimeout'],
     // browsers: ['PhantomJS'],
     singleRun: false
   });
