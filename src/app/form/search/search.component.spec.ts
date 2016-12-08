@@ -81,7 +81,7 @@ fdescribe('SearchComponent Isolated', () => {
     expect(emittedValue).toBe(expectedValue);
   });
   
-  fdescribe('should not emit the same value twice, spaces at the end and begining are trimmed', () => {
+  describe('should not emit the same value twice, spaces at the end and begining are trimmed', () => {
     let count: number;
     beforeEach(() => {
       count = 0;
@@ -120,7 +120,7 @@ fdescribe('SearchComponent Isolated', () => {
       expect(emittedValue).toBe('different value');
     });
     
-    it('should not emit twice with same value (trimed) on user input after debouncing', fakeAsync(() => {
+    it('should not emit twice with same value (trimed) on user input after debouncing 1000ms', fakeAsync(() => {
       component.searchControl.setValue('hello');
       tick(1000);
       expect(count).toBe(1);
@@ -169,7 +169,6 @@ fdescribe('Search Component in test component', () => {
       tick(1400);
       expect(component.search).not.toHaveBeenCalled();
       tick(99);
-      fixture.detectChanges();
       expect(component.search).not.toHaveBeenCalled();
       tick(1);
       expect(component.search).toHaveBeenCalledWith(expectedValue);
