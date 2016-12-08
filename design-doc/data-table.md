@@ -8,13 +8,7 @@ pass the search text to the server and expect a new list of results.
 
 The server decide how to search with the given text.
 
-Client side search does have these features:
-
-1. debounce 1000ms by default before request is send off to server.
-1. debounce time can be specified.
-1. esc key remove search box
-1. Hitting Enter key starts search immediately without debounce.
-1. Clicking search icon starts search immediately without debounce.
+Client side search does have []these features](../src/app/form/search/search.md)
 
 Other constraints:
 1. respect pagination and sort preferences
