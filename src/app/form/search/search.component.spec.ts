@@ -86,7 +86,7 @@ fdescribe('SearchComponent Isolated', () => {
     beforeEach(() => {
       count = 0;
       sub = component.search.subscribe(value => {
-        count ++;
+        count++;
         emittedValue = value;
       });
     });
@@ -102,7 +102,7 @@ fdescribe('SearchComponent Isolated', () => {
       expect(count).toBe(2);
       expect(emittedValue).toBe('different value');
     });
-  
+    
     it('should not emit twice with same value when hit Enter key twice', () => {
       component.searchControl.setValue('hello');
       component.onKeyUp('Enter');
@@ -119,7 +119,7 @@ fdescribe('SearchComponent Isolated', () => {
       expect(count).toBe(2);
       expect(emittedValue).toBe('different value');
     });
-  
+    
     it('should not emit twice with same value (trimed) on user input after debouncing', fakeAsync(() => {
       component.searchControl.setValue('hello');
       tick(1000);
