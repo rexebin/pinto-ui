@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -13,22 +13,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   @Output() search = new EventEmitter<string>();
-
+  @Input() debounce = 1000;
   constructor() {
   }
-
+  
+  previousValue: string;
   searchControl = new FormControl('');
   sub: Subscription;
 
   ngOnInit() {
-
-    this.sub = this.searchControl.valueChanges.debounceTime(500).subscribe(value => {
-      this.search.emit(value);
+    this.sub = this.searchControl.valueChanges.debounceTime(this.debounce).subscribe(value => {
+     this._filterDuplicatedSubmission(value);
     });
   }
 
   onClick() {
-    this.search.emit(this.searchControl.value);
+    this._filterDuplicatedSubmission(this.searchControl.value);
   }
 
   onKeyUp(code: string) {
@@ -37,7 +37,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     
     if(code === 'Enter'){
-      this.search.emit(this.searchControl.value);
+      this._filterDuplicatedSubmission(this.searchControl.value);
+    }
+  }
+  
+  _filterDuplicatedSubmission(value: string){
+    let trimmedValue = value.trim();
+    if(this.previousValue !== trimmedValue){
+      this.search.emit(trimmedValue);
+      this.previousValue = trimmedValue;
     }
   }
 

@@ -35,4 +35,8 @@ export class AppComponent implements OnDestroy {
     this.switcher = !this.switcher;
 
   }
+  
+  search(searchText: string){
+    console.log(searchText);
+  }
 }

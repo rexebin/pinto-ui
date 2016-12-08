@@ -10,7 +10,8 @@ The server decide how to search with the given text.
 
 Client side search does have these features:
 
-1. debounce 500ms before request is send off to server.
+1. debounce 1000ms by default before request is send off to server.
+1. debounce time can be specified.
 1. cancels previous result with observable
 1. respect pagination and sort preferences
 1. esc key remove search box

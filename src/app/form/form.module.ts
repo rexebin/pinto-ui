@@ -14,7 +14,7 @@ import {SearchComponent} from "./search/search.component";
     ReactiveFormsModule
   ],
   exports: [
-    ReactiveFormsModule
+    ReactiveFormsModule, SearchComponent
   ],
   declarations: [SearchComponent]
 })

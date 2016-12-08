@@ -12,6 +12,7 @@
     <div ptContainerSwitcher>
       <button class="btn btn-primary" [routerLink]="['service-user/service-user']">Service User Manager</button>
       <router-outlet></router-outlet>
+      <pt-search (search)="search($event)"></pt-search>
     </div>
 
 </div>
