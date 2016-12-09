@@ -7,14 +7,14 @@ import { Action } from '@ngrx/store';
 @Injectable()
 
 export class ContainerActions {
-  static SET_CONTAINER_FLUID = '[Container] Set to container-fluid';
+  static SetContainerFluid = '[Container] Set to container-fluid';
+  static SetContainer = '[Container] Set to container';
   
   setContainerFluid(): Action {
-    return { type: ContainerActions.SET_CONTAINER_FLUID }
+    return { type: ContainerActions.SetContainerFluid }
   }
   
-  static SET_CONTAINER = '[Container] Set to container';
-  setContainer(): Action{
-    return {type: ContainerActions.SET_CONTAINER}
+  setContainer(): Action {
+    return { type: ContainerActions.SetContainer }
   }
 }

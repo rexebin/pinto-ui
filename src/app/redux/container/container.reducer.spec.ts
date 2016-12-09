@@ -14,6 +14,7 @@ describe('Container Reducer', () => {
   it('should return current state if type is not valid', () => {
     expect(containerReducer(false, { type: 'nothingMatching' })).toBeFalsy();
     expect(containerReducer(true, { type: 'nothingMatching' })).toBeTruthy();
+    expect(containerReducer(null, {type: 'nothingMatching'})).toBe(false);
   });
 
 });
