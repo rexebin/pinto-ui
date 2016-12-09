@@ -3,7 +3,7 @@
  */
 
 import { ActionReducer, Action } from '@ngrx/store';
-import { SortByActions } from './sortby.actions';
+import { SortByActions } from './data-table.actions';
 import * as _ from "lodash";
 export type Order = 'asc' | 'desc';
 export type SortByPayload = {

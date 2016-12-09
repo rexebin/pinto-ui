@@ -1,4 +1,4 @@
-import { ContainerState } from './container/container.reducer';
+import { ContainerState } from './layout/container-switcher/container.reducer';
 /**
  * Created by Rex on 09/12/2016.
  */

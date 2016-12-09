@@ -3,7 +3,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { SortByPayload } from './sortby.reducer';
+import { SortByPayload } from './data-table.reducer';
 import { Action } from '@ngrx/store';
 @Injectable()
 

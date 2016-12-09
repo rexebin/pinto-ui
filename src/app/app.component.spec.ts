@@ -1,13 +1,13 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
-import { containerReducer } from './redux/container/container.reducer';
+import { containerReducer } from './layout/container-switcher/container.reducer';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from './core/core.module';
 import { Router } from '@angular/router';
 import { RouterStub, RouterOutletStubComponent, RouterLinkStubDirective } from './test/mocks/router-stubs';
 import { FormModule } from './form/form.module';
-import { ContainerActions } from './redux/container/container.actions';
+import { ContainerActions } from './layout/container-switcher/container.actions';
 
 describe('App: PintoUi', () => {
   
