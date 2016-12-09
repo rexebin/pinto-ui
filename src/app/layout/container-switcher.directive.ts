@@ -12,22 +12,24 @@ export class ContainerSwitcherDirective implements OnDestroy {
   sub: Subscription;
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if(this.sub){
+      this.sub.unsubscribe();
+    }
   }
 
-  constructor(private store: Store<AppState>, private el: ElementRef, private renderer: Renderer) {
+  constructor(private store: Store<AppState>, private el: ElementRef) {
     this.sub = this.store.map(state => state['container']).distinctUntilChanged().subscribe(isFluid => {
-      this.setClass(isFluid);
+      this._setClass(isFluid);
     });
   }
 
-  setClass(isFluid: boolean) {
+  _setClass(isFluid: boolean) {
     if (isFluid) {
-      this.renderer.setElementClass(this.el.nativeElement, 'container', false);
-      this.renderer.setElementClass(this.el.nativeElement, 'container-fluid', true);
+      this.el.nativeElement.classList.remove('container');
+      this.el.nativeElement.classList.add('container-fluid');
     } else {
-      this.renderer.setElementClass(this.el.nativeElement, 'container-fluid', false);
-      this.renderer.setElementClass(this.el.nativeElement, 'container', true);
+      this.el.nativeElement.classList.remove('container-fluid');
+      this.el.nativeElement.classList.add('container');
     }
   }
 }
