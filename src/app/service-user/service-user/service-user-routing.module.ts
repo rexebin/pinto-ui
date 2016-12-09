@@ -4,7 +4,7 @@ import { ServiceUserEditComponent } from './service-user-edit/service-user-edit.
 import { ServiceUserDetailComponent } from './service-user-detail/service-user-detail.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MasterDetailComponent } from '../../shared/master-detail/master-detail.component';
+import { MasterDetailComponent } from '../../master-detail/master-detail/master-detail.component';
 import { ServiceUserDetailResolveService } from '../resolver/service-user-detail-resolve.service';
 import { ServiceUserListResolveService } from '../resolver/service-user-list-resolve.service';
 import { ServiceUserEditResolveService } from '../resolver/service-user-edit-resolve.service';

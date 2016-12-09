@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MasterDetailComponent } from './master-detail/master-detail.component';
 import { RouterModule } from '@angular/router';
 
 /**
@@ -12,15 +11,13 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
     NgbModule
   ],
   exports: [
     NgbModule,
-    CommonModule,
-    MasterDetailComponent
+    CommonModule
   ],
-  declarations: [MasterDetailComponent]
+  declarations: []
 })
 export class SharedModule {
 }

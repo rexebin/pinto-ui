@@ -5,10 +5,11 @@ import { ServiceUserListComponent } from './service-user-list/service-user-list.
 import { ServiceUserEditComponent } from './service-user-edit/service-user-edit.component';
 import { ServiceUserDetailComponent } from './service-user-detail/service-user-detail.component';
 import { ServiceUserRoutingModule } from './service-user-routing.module';
+import { MasterDetailModule } from '../../master-detail/master-detail.module';
 
 @NgModule({
   imports: [
-    SharedModule, FormModule, ServiceUserRoutingModule
+    SharedModule, FormModule, ServiceUserRoutingModule, MasterDetailModule
   ],
   declarations: [ServiceUserListComponent, ServiceUserEditComponent, ServiceUserDetailComponent]
 })
