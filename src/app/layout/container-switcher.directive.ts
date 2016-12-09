@@ -9,16 +9,16 @@ interface AppState {
   selector: '[ptContainerSwitcher]'
 })
 export class ContainerSwitcherDirective implements OnDestroy {
-  sub: Subscription;
+  _subscription: Subscription;
 
   ngOnDestroy(): void {
-    if(this.sub){
-      this.sub.unsubscribe();
+    if(this._subscription){
+      this._subscription.unsubscribe();
     }
   }
 
   constructor(private store: Store<AppState>, private el: ElementRef) {
-    this.sub = this.store.map(state => state['container']).distinctUntilChanged().subscribe(isFluid => {
+    this._subscription = this.store.map(state => state['container']).distinctUntilChanged().subscribe(isFluid => {
       this._setClass(isFluid);
     });
   }
