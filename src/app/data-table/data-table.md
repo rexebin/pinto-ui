@@ -8,7 +8,7 @@ pass the search text to the server and expect a new list of results.
 
 The server decide how to search with the given text.
 
-Client side search does have [these features](../src/app/form/search/search.md)
+Client side search does have [these features](../form/search/search.md)
 
 Other constraints:
 1. respect pagination and sort preferences
