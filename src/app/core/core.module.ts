@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
 import { NgbModule, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
-import { containerReducer } from '../reducer/container.reducer';
+import { containerReducer } from '../redux/container/container.reducer';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 /**

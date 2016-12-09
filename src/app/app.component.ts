@@ -1,9 +1,6 @@
-import { Component, OnDestroy, Input, EventEmitter } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { setContainerFluid, setContainer } from './reducer/container.reducer';
+import { Component, OnDestroy } from '@angular/core';
 import { MenuItem } from './common/apis/menu-item';
 import { topNavMenuItems } from './layout/top-nav-menu-items';
-import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-root',
@@ -11,32 +8,20 @@ import {Http} from "@angular/http";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-
-  switcher = true;
+  
   topMenuItems: MenuItem[] = topNavMenuItems;
+  
   ngOnDestroy(): void {
-
-  }
-
-  title = 'app works!';
-
-  constructor(private store: Store<any>) {
-
-  }
-
-  togglePageWidth() {
-
-    if (this.switcher) {
-      this.store.dispatch({ type: setContainerFluid });
-
-    } else {
-      this.store.dispatch({ type: setContainer });
-    }
-    this.switcher = !this.switcher;
-
+    
   }
   
-  search(searchText: string){
+  title = 'app works!';
+  
+  constructor() {
+    
+  }
+  
+  search(searchText: string) {
     console.log(searchText);
   }
 }

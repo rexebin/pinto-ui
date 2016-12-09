@@ -1,12 +1,11 @@
 import { ActionReducer, Action } from '@ngrx/store';
-export const setContainerFluid = 'set-container-fluid';
-export const setContainer = 'set-container';
+import { ContainerActions } from './container.actions';
 
 export const containerReducer: ActionReducer<boolean> = (state: boolean = false, action: Action) => {
   switch (action.type) {
-    case setContainerFluid:
+    case ContainerActions.SET_CONTAINER_FLUID:
       return true;
-    case setContainer:
+    case ContainerActions.SET_CONTAINER:
       return false;
     default:
       return state;
