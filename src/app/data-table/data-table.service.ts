@@ -7,7 +7,7 @@ export type Order = 'asc' | 'desc';
 export type PageSize = 10 | 20 | 30 | 50 | 100;
 
 export type TableFilter = {
-  entity?: string,
+  entity: string,
   sortBy?: string,
   order?: Order,
   page?: number,
