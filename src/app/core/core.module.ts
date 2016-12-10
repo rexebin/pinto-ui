@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core';
-import { NgbModule, NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
-import { StoreModule } from '@ngrx/store';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 /**
@@ -13,7 +12,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   ],
   exports: [
     NgbModule,
-    StoreModule,
     DashboardComponent
   ],
   providers: [],

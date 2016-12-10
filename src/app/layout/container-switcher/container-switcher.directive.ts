@@ -1,7 +1,5 @@
 import { Directive, ElementRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../app-state';
 import { ContainerService } from './container.service';
 
 @Directive({
