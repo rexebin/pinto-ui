@@ -2,6 +2,7 @@ import { Directive, ElementRef, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app-state';
+import { ContainerService } from './container.service';
 
 @Directive({
   selector: '[ptContainerSwitcher]'
@@ -15,19 +16,19 @@ export class ContainerSwitcherDirective implements OnDestroy {
     }
   }
 
-  constructor(private store: Store<AppState>, private el: ElementRef) {
-    this._subscription = this.store.map(state => state['container']).distinctUntilChanged().subscribe(isFluid => {
+  constructor(private containerService: ContainerService, private el: ElementRef) {
+    this._subscription = this.containerService.isFluid.distinctUntilChanged().subscribe(isFluid => {
       this._setClass(isFluid);
     });
   }
 
   _setClass(isFluid: boolean) {
     if (isFluid) {
-      this.el.nativeElement.classList.remove('container');
-      this.el.nativeElement.classList.add('container-fluid');
+      this.el.nativeElement.classList.remove('isFluid');
+      this.el.nativeElement.classList.add('isFluid-fluid');
     } else {
-      this.el.nativeElement.classList.remove('container-fluid');
-      this.el.nativeElement.classList.add('container');
+      this.el.nativeElement.classList.remove('isFluid-fluid');
+      this.el.nativeElement.classList.add('isFluid');
     }
   }
 }

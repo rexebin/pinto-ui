@@ -21,20 +21,11 @@ export type PagePayload = {
 @Injectable()
 
 export class DataTableActions {
-  static Sort = '[Sort] Sort list';
+  static SortingOrPaging = '[Sorting or paging] for data list';
   
-  sort(payload: SortPayload): Action {
+  sortingOrPaging(payload: SortPayload | PagePayload): Action {
     return {
-      type: DataTableActions.Sort,
-      payload: payload
-    }
-  }
-  
-  static Page = '[Page] Change page and page size';
-  
-  page(payload: PagePayload): Action{
-    return {
-      type: DataTableActions.Page,
+      type: DataTableActions.SortingOrPaging,
       payload: payload
     }
   }

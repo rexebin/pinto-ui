@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table/data-table.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormModule } from '../form/form.module';
 import { SortableDirective } from './sortable/sortable.directive';
+import { DataTableService } from './data-table.service';
 
 @NgModule({
   imports: [
@@ -12,7 +13,16 @@ import { SortableDirective } from './sortable/sortable.directive';
     FormModule
   ],
   exports: [DataTableComponent],
-  declarations: [DataTableComponent, SortableDirective]
+  declarations: [
+    DataTableComponent,
+    SortableDirective
+  ]
 })
 export class DataTableModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: DataTableModule,
+      providers: [DataTableService]
+    }
+  }
 }

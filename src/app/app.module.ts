@@ -20,7 +20,7 @@ import {AppRoutingModule} from "./app-routing.module";
         CoreModule.forRoot(),
         AppRoutingModule,
         FormModule,
-        LayoutModule,
+        LayoutModule.forRoot(),
     ],
     providers: [],
     bootstrap: [AppComponent]

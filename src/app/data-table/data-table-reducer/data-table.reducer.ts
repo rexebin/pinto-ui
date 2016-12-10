@@ -3,7 +3,7 @@
  */
 
 import { ActionReducer, Action } from '@ngrx/store';
-import { DataTableActions, SortPayload } from './data-table.actions';
+import { DataTableActions, SortPayload, PagePayload } from './data-table.actions';
 import * as _ from "lodash";
 
 export type Order = 'asc' | 'desc';
@@ -22,21 +22,26 @@ const initialState: DataTableState = [];
 export const DataTableReducer: ActionReducer<DataTableState> =
   (state: DataTableState = initialState, action: Action) => {
     switch (action.type) {
-      case DataTableActions.Sort:
-        let clone: DataTableState = _.cloneDeep(state);
-        let payload: SortPayload = action.payload;
-        let exist = _.find(clone, (p) => p.entity === payload.entity);
-        if (exist) {
-          exist = _.extend(exist, payload);
-        } else {
-          let newEntity: DataTableParameter = _.extend({}, payload);
-          clone = [
-            ...clone,
-            newEntity
-          ];
-        }
-        return clone;
+      case DataTableActions.SortingOrPaging:
+        return getNewState(state, action);
       default:
         return state;
     }
   };
+
+function getNewState(state: DataTableState, action: Action): DataTableState {
+  let clonedState: DataTableState = _.cloneDeep(state);
+  const payload: SortPayload | PagePayload = action.payload;
+  let exist = _.find(clonedState, (p) => p.entity === payload.entity);
+  if (exist) {
+    _.extend(exist, payload);
+  } else {
+    let newEntity: DataTableParameter = { entity: payload.entity };
+    _.extend(newEntity, payload);
+    clonedState = [
+      ...clonedState,
+      newEntity
+    ];
+  }
+  return clonedState;
+}

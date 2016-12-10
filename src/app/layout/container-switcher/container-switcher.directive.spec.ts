@@ -3,21 +3,19 @@ import { ContainerSwitcherDirective } from './container-switcher.directive';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import '../../test/matchers';
-import { StoreModule, Store } from '@ngrx/store';
-import { ContainerActions } from './container.actions';
-import { containerReducer } from './container.reducer';
+import { ContainerService } from './container.service';
 
-describe('Directive: ContainerSwitcher', () => {
+fdescribe('Directive: ContainerSwitcher', () => {
   let fixture: ComponentFixture<TestComponent>;
   let des: DebugElement;
-  let containerActions: ContainerActions;
   beforeEach(() => {
     fixture = TestBed.configureTestingModule({
-      imports: [StoreModule.provideStore({ container: containerReducer })],
+      imports: [],
       declarations: [
         ContainerSwitcherDirective,
         TestComponent
-      ]
+      ],
+      providers: [ContainerService]
       
     }).createComponent(TestComponent);
     fixture.detectChanges();
@@ -26,24 +24,23 @@ describe('Directive: ContainerSwitcher', () => {
   
   beforeEach(() => {
     des = fixture.debugElement.query(By.directive(ContainerSwitcherDirective));
-    containerActions = new ContainerActions();
   });
   
-  it('should add class container by default', async(() => {
-    expect(des.nativeElement).toHaveCssClass('container');
-    expect(des.nativeElement).not.toHaveCssClass('container-fluid');
+  it('should add class isFluid by default', async(() => {
+    expect(des.nativeElement).toHaveCssClass('isFluid');
+    expect(des.nativeElement).not.toHaveCssClass('isFluid-fluid');
   }));
   
   it('should reads the correct value after store dispatched actions', async(() => {
-    let store = TestBed.get(Store);
-    store.dispatch(containerActions.setContainerFluid());
+    let containerService = fixture.debugElement.injector.get(ContainerService);
+    containerService.setToContainerFluid();
     fixture.detectChanges();
-    expect(des.nativeElement).toHaveCssClass('container-fluid');
-    expect(des.nativeElement).not.toHaveCssClass('container');
-    store.dispatch(containerActions.setContainer());
+    expect(des.nativeElement).toHaveCssClass('isFluid-fluid');
+    expect(des.nativeElement).not.toHaveCssClass('isFluid');
+    containerService.setToContainer();
     fixture.detectChanges();
-    expect(des.nativeElement).not.toHaveCssClass('container-fluid');
-    expect(des.nativeElement).toHaveCssClass('container');
+    expect(des.nativeElement).not.toHaveCssClass('isFluid-fluid');
+    expect(des.nativeElement).toHaveCssClass('isFluid');
   }));
   
 });

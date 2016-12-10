@@ -5,7 +5,7 @@ import { SortPayload, DataTableActions, PagePayload } from './data-table.actions
 
 
 fdescribe('Data Table Action', () => {
-  it('should create an action to sort data', () => {
+  it('should create an action to sortingOrPaging data', () => {
     const payload: SortPayload = {
       entity: 'entityName',
       sortBy: 'propertyName',
@@ -14,10 +14,10 @@ fdescribe('Data Table Action', () => {
     
     const action = new DataTableActions();
     const expectedAction = {
-      type: DataTableActions.Sort,
+      type: DataTableActions.SortingOrPaging,
       payload: payload
     };
-    expect(action.sort(payload)).toEqual(expectedAction);
+    expect(action.sortingOrPaging(payload)).toEqual(expectedAction);
   });
   
   it('should create an action to page data', () => {
@@ -29,10 +29,10 @@ fdescribe('Data Table Action', () => {
     
     const action = new DataTableActions();
     const expectedAction = {
-      type: DataTableActions.Page,
+      type: DataTableActions.SortingOrPaging,
       payload: payload
     };
     
-    expect(action.page(payload)).toEqual(expectedAction);
+    expect(action.sortingOrPaging(payload)).toEqual(expectedAction);
   });
 });

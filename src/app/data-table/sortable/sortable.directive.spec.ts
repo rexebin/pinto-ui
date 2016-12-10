@@ -20,19 +20,19 @@ describe('SortableDirective', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-  it('should emit sort event with payload when clicking the host element', async(() => {
+  it('should emit sortingOrPaging event with payload when clicking the host element', async(() => {
     
   }));
   
-  it('should emit sort event with payload and toggle sort order when clicking the host element repeatedly', async(() => {
+  it('should emit sortingOrPaging event with payload and toggle sortingOrPaging order when clicking the host element repeatedly', async(() => {
     
   }));
   
-  it('should show an upper arrow indicate asc sort order after emit sort event with asc', async(() => {
+  it('should show an upper arrow indicate asc sortingOrPaging order after emit sortingOrPaging event with asc', async(() => {
     
   }));
   
-  it('should show a downward arrow indicate desc sort order after emit sort event with desc', async(() => {
+  it('should show a downward arrow indicate desc sortingOrPaging order after emit sortingOrPaging event with desc', async(() => {
     
   }));
   
