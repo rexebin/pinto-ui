@@ -4,14 +4,12 @@ import { SortPayload, DataTableActions, PagePayload } from './data-table.actions
  */
 
 
-describe('Data Table Action', () => {
+fdescribe('Data Table Action', () => {
   it('should create an action to sort data', () => {
     const payload: SortPayload = {
       entity: 'entityName',
-      sortParameters: {
-        sortBy: 'propertyName',
-        order: 'asc'
-      }
+      sortBy: 'propertyName',
+      order: 'asc'
     };
     
     const action = new DataTableActions();
@@ -25,10 +23,8 @@ describe('Data Table Action', () => {
   it('should create an action to page data', () => {
     const payload: PagePayload = {
       entity: 'name',
-      pageParameters: {
-        currentPage: 1,
-        pageSize: 10
-      }
+      currentPage: 1,
+      pageSize: 10
     };
     
     const action = new DataTableActions();

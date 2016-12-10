@@ -6,24 +6,18 @@ import { Injectable } from '@angular/core';
 import { Order, PageSize } from './data-table.reducer';
 import { Action } from '@ngrx/store';
 
-export type SortParameters = {
+export type SortPayload = {
+  entity: string,
   sortBy: string,
   order: Order
-}
-export type SortPayload= {
-  entity: string,
-  sortParameters: SortParameters
-}
-
-export type PageParameters = {
-  currentPage: number,
-  pageSize: PageSize
 }
 
 export type PagePayload = {
   entity: string,
-  pageParameters: PageParameters
+  currentPage: number,
+  pageSize: PageSize
 }
+
 @Injectable()
 
 export class DataTableActions {

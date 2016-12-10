@@ -8,27 +8,33 @@ import * as _ from "lodash";
 
 export type Order = 'asc' | 'desc';
 export type PageSize = 10 | 20 | 30 | 50 | 100;
-export type ListParameters = {
-  sortBy: string,
+export type DataTableParameter = {
+  entity: string,
+  sortBy?: string,
   order?: Order,
-  currentPage: number,
-  pageSize: PageSize
+  currentPage?: number,
+  pageSize?: PageSize
 }
 
-export type DataTableState = {
-  [entity: string]: ListParameters
-}
-const initialState: DataTableState = {};
+export type DataTableState = DataTableParameter[];
+const initialState: DataTableState = [];
 
 export const DataTableReducer: ActionReducer<DataTableState> =
   (state: DataTableState = initialState, action: Action) => {
     switch (action.type) {
       case DataTableActions.Sort:
-        console.log(state);
-        let clone = _.cloneDeep(state);
-        console.log(clone);
+        let clone: DataTableState = _.cloneDeep(state);
         let payload: SortPayload = action.payload;
-        _.extend(clone[payload.entity], payload.sortParameters);
+        let exist = _.find(clone, (p) => p.entity === payload.entity);
+        if (exist) {
+          exist = _.extend(exist, payload);
+        } else {
+          let newEntity: DataTableParameter = _.extend({}, payload);
+          clone = [
+            ...clone,
+            newEntity
+          ];
+        }
         return clone;
       default:
         return state;
