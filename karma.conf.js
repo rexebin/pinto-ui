@@ -12,10 +12,6 @@ module.exports = function (config) {
       require('karma-remap-istanbul'),
       require('angular-cli/plugins/karma')
     ],
-    phantomjsLauncher: {
-      // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-      exitOnResourceError: true
-    },
     files: [
       {pattern: './src/test.ts', watched: false}
     ],
