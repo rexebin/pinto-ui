@@ -4,7 +4,7 @@ import { CurrentOccupancyComponent } from "./current-occupancy/current-occupancy
 
 const routes: Routes = [
   { path: '', component: CurrentOccupancyComponent },
-  { path: 'service-user', loadChildren: './service-user/service-user.module#ServiceUserModule' }
+  { path: 'service-user', loadChildren: 'app/service-user/service-user/service-user.module#ServiceUserModule' }
 ];
 
 @NgModule({

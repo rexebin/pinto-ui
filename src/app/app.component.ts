@@ -5,7 +5,7 @@ import { topNavMenuItems } from './layout/top-nav-menu-items';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
   
