@@ -1,7 +1,7 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { TableFilterService, TableFilters, SortParams, TableFilter, PageParams } from './table-filter.service';
+import { TableFilterService, TableFilters, SortParams, PageParams } from './table-filter.service';
 
 fdescribe('TableFilterService', () => {
   let service: TableFilterService;
