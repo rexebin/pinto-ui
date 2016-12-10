@@ -29,7 +29,7 @@ export type PageParams = {
 export type TableFilters = TableFilter[];
 
 @Injectable()
-export class DataTableService {
+export class TableFilterService {
   
   private _filters: BehaviorSubject<TableFilters> = new BehaviorSubject([]);
   

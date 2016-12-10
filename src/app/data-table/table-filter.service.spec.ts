@@ -1,19 +1,19 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { DataTableService, TableFilters, SortParams, TableFilter, PageParams } from './data-table.service';
+import { TableFilterService, TableFilters, SortParams, TableFilter, PageParams } from './table-filter.service';
 
-fdescribe('DataTableService', () => {
-  let service: DataTableService;
+fdescribe('TableFilterService', () => {
+  let service: TableFilterService;
   let filters: TableFilters;
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DataTableService]
+      providers: [TableFilterService]
     });
   });
   
   beforeEach(() => {
-    service = TestBed.get(DataTableService);
+    service = TestBed.get(TableFilterService);
     service.filters.subscribe(f => {
       filters = f;
     });

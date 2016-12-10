@@ -4,7 +4,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormModule } from '../form/form.module';
 import { SortableDirective } from './sortable/sortable.directive';
-import { DataTableService } from './data-table.service';
+import { TableFilterService } from './table-filter.service';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ export class DataTableModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: DataTableModule,
-      providers: [DataTableService]
+      providers: [TableFilterService]
     }
   }
 }
