@@ -4,8 +4,8 @@ import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import '../../test/matchers';
 import { StoreModule, Store } from '@ngrx/store';
-import { containerReducer } from '../redux/container/container.reducer';
-import { ContainerActions } from '../redux/container/container.actions';
+import { ContainerActions } from './container.actions';
+import { containerReducer } from './container.reducer';
 
 describe('Directive: ContainerSwitcher', () => {
   let fixture: ComponentFixture<TestComponent>;

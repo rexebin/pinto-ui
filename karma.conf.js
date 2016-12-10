@@ -8,6 +8,7 @@ module.exports = function (config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
+      require('karma-firefox-launcher'),
       require('karma-remap-istanbul'),
       require('angular-cli/plugins/karma')
     ],
@@ -37,7 +38,20 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    customLaunchers: {
+      ChromeBackground: {
+        base: 'ChromeCanary',
+        flags: ['--disable-background-timer-throttling']
+      },
+      FirefoxLowTimeout: {
+        base: 'Firefox',
+        prefs: {
+          'dom.min_background_timeout_value': 5
+        }
+      }
+    },
+    browsers: ['FirefoxLowTimeout'],
+    // browsers: ['PhantomJS'],
     singleRun: false
   });
 };

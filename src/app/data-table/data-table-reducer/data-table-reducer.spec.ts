@@ -14,7 +14,7 @@ fdescribe('Data Table Reducer', () => {
         sortBy: 'property'
       }
     };
-    console.log(DataTableReducer(null, action.sort(payload)));
+    console.log(DataTableReducer({}, action.sort(payload)));
   });
   
   it('should update list parameters with page action', () => {

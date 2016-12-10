@@ -24,7 +24,9 @@ export const DataTableReducer: ActionReducer<DataTableState> =
   (state: DataTableState = initialState, action: Action) => {
     switch (action.type) {
       case DataTableActions.Sort:
+        console.log(state);
         let clone = _.cloneDeep(state);
+        console.log(clone);
         let payload: SortPayload = action.payload;
         _.extend(clone[payload.entity], payload.sortParameters);
         return clone;
