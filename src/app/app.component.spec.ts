@@ -5,6 +5,7 @@ import { CoreModule } from './core/core.module';
 import { Router } from '@angular/router';
 import { RouterStub, RouterOutletStubComponent, RouterLinkStubDirective } from './test/mocks/router-stubs';
 import { FormModule } from './form/form.module';
+import { ContainerService } from './layout/container-switcher/container.service';
 
 describe('App: PintoUi', () => {
   
@@ -20,7 +21,7 @@ describe('App: PintoUi', () => {
         RouterOutletStubComponent,
         RouterLinkStubDirective
       ],
-      providers: [{ provide: Router, useClass: RouterStub }]
+      providers: [{ provide: Router, useClass: RouterStub }, ContainerService]
     });
   });
   let component, fixture;

@@ -4,7 +4,7 @@ import { TestBed, async, inject } from '@angular/core/testing';
 import { ContainerService } from './container.service';
 import { Subscription } from 'rxjs';
 
-fdescribe('ContainerService', () => {
+describe('ContainerService', () => {
   let service: ContainerService;
   let isFluid: boolean;
   let subscription: Subscription;

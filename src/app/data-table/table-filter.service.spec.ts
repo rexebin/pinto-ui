@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { TableFilterService, TableFilters, SortParams, PageParams } from './table-filter.service';
 
-fdescribe('TableFilterService', () => {
+describe('TableFilterService', () => {
   let service: TableFilterService;
   let filters: TableFilters;
   beforeEach(() => {

@@ -22,11 +22,11 @@ export class ContainerSwitcherDirective implements OnDestroy {
 
   _setClass(isFluid: boolean) {
     if (isFluid) {
-      this.el.nativeElement.classList.remove('isFluid');
-      this.el.nativeElement.classList.add('isFluid-fluid');
+      this.el.nativeElement.classList.remove('container');
+      this.el.nativeElement.classList.add('container-fluid');
     } else {
-      this.el.nativeElement.classList.remove('isFluid-fluid');
-      this.el.nativeElement.classList.add('isFluid');
+      this.el.nativeElement.classList.remove('container-fluid');
+      this.el.nativeElement.classList.add('container');
     }
   }
 }
