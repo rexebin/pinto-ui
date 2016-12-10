@@ -3,28 +3,30 @@
  */
 
 import { ActionReducer, Action } from '@ngrx/store';
-import { SortByActions } from './data-table.actions';
+import { DataTableActions, SortPayload } from './data-table.actions';
 import * as _ from "lodash";
-export type Order = 'asc' | 'desc';
-export type SortByPayload = {
-  entity: string,
-  property: string,
-  order?: Order
-}
-export type SortByState = SortByPayload[];
-const initialState: SortByState = [];
 
-export const SortbyReducer: ActionReducer<SortByState> =
-  (state: SortByState = initialState, action: Action) => {
+export type Order = 'asc' | 'desc';
+export type PageSize = 10 | 20 | 30 | 50 | 100;
+export type ListParameters = {
+  sortBy: string,
+  order?: Order,
+  currentPage: number,
+  pageSize: PageSize
+}
+
+export type DataTableState = {
+  [entity: string]: ListParameters
+}
+const initialState: DataTableState = {};
+
+export const DataTableReducer: ActionReducer<DataTableState> =
+  (state: DataTableState = initialState, action: Action) => {
     switch (action.type) {
-      case SortByActions.Sort:
-        const clone = _.cloneDeep(state);
-        let existingPayload: SortByPayload = _.find(clone, (c) => c.entity === action.payload.entity);
-        if(existingPayload){
-          existingPayload = action.payload;
-        }else{
-          clone.push(action.payload);
-        }
+      case DataTableActions.Sort:
+        let clone = _.cloneDeep(state);
+        let payload: SortPayload = action.payload;
+        _.extend(clone[payload.entity], payload.sortParameters);
         return clone;
       default:
         return state;
