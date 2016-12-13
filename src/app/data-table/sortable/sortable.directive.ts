@@ -1,7 +1,6 @@
 import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { TableFilterService, Order } from '../table-filter.service';
+import { TableFilterService, Order, SortParams } from '../table-filter.service';
 import { Subscription } from 'rxjs';
-import * as _ from 'lodash';
 
 @Directive({
   selector: '[ptSortable]',
@@ -11,45 +10,34 @@ import * as _ from 'lodash';
 })
 export class SortableDirective implements OnDestroy, OnInit {
   
-  @Input() entityName: string;
   @Input() sortBy: string;
-  order: Order = 'desc';
+  private _order: Order;
+  
   private _subscription: Subscription;
   
   constructor(private filterService: TableFilterService, private elementRef: ElementRef) {
-    let myvar: {name: 'myname', gender: 'male'};
-    type Person = {
-      name: string,
-      gender: string
-    }
-    type Persons = Person[];
   }
   
   ngOnInit(): void {
-    this._subscription = this.filterService.filters.subscribe(filters => {
-      let f = _.find(filters, (value) => value.entity === this.entityName);
+    if (this.filterService.currentFilter.sortBy === this.sortBy) {
+      this._order = this.filterService.currentFilter.order;
+    } else {
+      this._order = 'desc';
+    }
+    this._subscription = this.filterService.filter.subscribe(filter => {
       let el: HTMLElement = this.elementRef.nativeElement.querySelector('i.pt-sort-icon');
-      if (!f) {
+      if (filter.sortBy !== this.sortBy) {
         if (el) {
           this.elementRef.nativeElement.removeChild(el);
           return;
         }
         return;
       }
-      
-      if (f.sortBy !== this.sortBy) {
-        if (el) {
-          this.elementRef.nativeElement.removeChild(el);
-          return;
-        }
-        return;
-      }
-      
       let icon: HTMLElement = document.createElement('i');
       icon.classList.add('fa', 'pt-sort-icon');
-      if (this.order === 'asc')
+      if (filter.order === 'asc')
         icon.classList.add('fa-caret-up');
-      if (this.order === 'desc')
+      if (filter.order === 'desc')
         icon.classList.add('fa-caret-down');
       
       if (!el) {
@@ -58,18 +46,16 @@ export class SortableDirective implements OnDestroy, OnInit {
         this.elementRef.nativeElement.replaceChild(icon, el);
       }
       
-      this.order = f.order;
     });
   }
   
   onClick() {
-    this.order = this.order === 'asc' ? 'desc' : 'asc';
-    let filterParam = {
-      entity: this.entityName,
+    this._order = this._order === 'asc' ? 'desc' : 'asc';
+    let filterParam: SortParams = {
       sortBy: this.sortBy,
-      order: this.order
+      order: this._order
     };
-    this.filterService.filter(filterParam);
+    this.filterService.setFilter(filterParam);
   }
   
   ngOnDestroy(): void {

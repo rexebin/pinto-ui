@@ -26,12 +26,14 @@ export type PageParams = {
 @Injectable()
 export class TableFilterService {
   
-  private _defaultFilter: TableFilter = {
-    sortBy: 'created',
-    order: 'desc',
-    page: 1,
-    pageSize: 10
-  };
+  private get _defaultFilter(): TableFilter {
+    return {
+      sortBy: 'created',
+      order: 'desc',
+      page: 1,
+      pageSize: 10
+    };
+  }
   
   private _entityName: string;
   
