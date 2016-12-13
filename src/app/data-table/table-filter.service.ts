@@ -63,10 +63,12 @@ export class TableFilterService {
   }
   
   _setItem(f: TableFilter) {
+    if (!this._entityName) return;
     localStorage.setItem(this._entityName, JSON.stringify(f));
   }
   
   _getItem(): TableFilter {
+    if (!this._entityName) return;
     return JSON.parse(localStorage.getItem(this._entityName));
   }
   

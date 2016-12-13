@@ -5,6 +5,12 @@ This service is to used to maintain data table sort and pagination behaviors.
 
 Each entity has its own sort and pagination behaviors. This service is to keep track of them all.
 
+## Init
+
+Data table component will be the root injector of this serve.
+
+Data Table has to call init to assign an entity name to the service.
+
 ## Sort
 
 1. sortBy: property name of entity used to sort the data
@@ -26,12 +32,7 @@ Observables:
 
 Methods, all emit value to filter: 
 
-1. page(page: number, pageSize: PageSize):void{}
-  `PageSize: 10 | 20 | 30 | 50 | 100`  
-  
-1. sort(sortBy: string, order: Order):void{}
-  `Order: 'asc' | 'desc'`
-  
+* setFilter(xx):void{}  
   
 
 
