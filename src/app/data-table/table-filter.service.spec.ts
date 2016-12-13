@@ -1,11 +1,13 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { TableFilterService, TableFilters, SortParams, PageParams } from './table-filter.service';
+import { TableFilterService, SortParams, PageParams, TableFilter } from './table-filter.service';
 
-describe('TableFilterService', () => {
+fdescribe('TableFilterService', () => {
   let service: TableFilterService;
-  let filters: TableFilters;
+  let filter: TableFilter;
+  let defaultFilter: TableFilter;
+  let expectedFilter: TableFilter;
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [TableFilterService]
@@ -14,127 +16,94 @@ describe('TableFilterService', () => {
   
   beforeEach(() => {
     service = TestBed.get(TableFilterService);
-    service.filters.subscribe(f => {
-      filters = f;
+    spyOn(service, '_getItem');
+    spyOn(service, '_setItem');
+    service.init('entity');
+    
+    service.filter.subscribe(f => {
+      filter = f;
     });
+    defaultFilter = {
+      sortBy: 'created',
+      order: 'desc',
+      page: 1,
+      pageSize: 10
+    };
+    
   });
   
   it('should return default value', () => {
-    expect(filters).toEqual([]);
+    expect(filter).toEqual(defaultFilter);
+    expect(service.currentFilter).toEqual(defaultFilter);
   });
   
+  it('should call _getItem on init', () => {
+    expect(service._getItem).toHaveBeenCalled();
+  });
   describe('Sort', () => {
     let sortParam: SortParams;
     beforeEach(() => {
       sortParam = {
-        entity: 'entity',
         order: 'asc',
         sortBy: 'property'
       };
-    });
-    it('should return correct value and return current value', () => {
-      expect(service.currentValue).toEqual([]);
-      service.filter(sortParam);
-      expect(filters).toEqual([sortParam]);
-      expect(service.currentValue).toEqual([sortParam]);
-    });
-    
-    it('should update value and return current value', () => {
-      service.filter(sortParam);
-      expect(filters).toEqual([sortParam]);
-      const newSortParam: SortParams = {
-        entity: 'entity',
-        order: 'desc',
-        sortBy: 'name'
-      };
-      service.filter(newSortParam);
-      expect(filters).toEqual([newSortParam]);
-      expect(service.currentValue).toEqual([newSortParam]);
-    });
-    
-    it('should handle both sort and page correctly', () => {
-      service.filter(sortParam);
-      const pageParams: PageParams = {
-        entity: 'entity',
+      expectedFilter = {
+        order: 'asc',
+        sortBy: 'property',
         page: 1,
         pageSize: 10
       };
-      service.filter(pageParams);
-      expect(filters).toEqual([
-        {
-          entity: 'entity',
-          order: 'asc',
-          sortBy: 'property',
-          page: 1,
-          pageSize: 10
-        }
-      ]);
+    });
+    it('should return correct value', () => {
+      service.setFilter(sortParam);
+      expect(service._setItem).toHaveBeenCalled();
+      expect(filter).toEqual(expectedFilter);
+      expect(service.currentFilter).toEqual(expectedFilter);
+    });
+    
+    it('should update value and return current value', () => {
       const newSortParam: SortParams = {
-        entity: 'entity',
         order: 'desc',
         sortBy: 'name'
       };
-      service.filter(newSortParam);
-      expect(filters).toEqual([
-        {
-          entity: 'entity',
-          order: 'desc',
-          sortBy: 'name',
-          page: 1,
-          pageSize: 10
-        }
-      ]);
-      service.filter({
-        entity: 'entity',
+      service.setFilter(newSortParam);
+      expect(service._setItem).toHaveBeenCalled();
+      expectedFilter.order = 'desc';
+      expectedFilter.sortBy = 'name';
+      expect(filter).toEqual(expectedFilter);
+      expect(service.currentFilter).toEqual(expectedFilter);
+    });
+    
+    it('should handle both sort and page correctly', () => {
+      const pageParams: PageParams = {
         page: 2,
         pageSize: 20
-      });
-      expect(filters).toEqual([
+      };
+      service.setFilter(pageParams);
+      expect(service._setItem).toHaveBeenCalled();
+      expect(filter).toEqual(
         {
-          entity: 'entity',
+          order: 'desc',
+          sortBy: 'created',
+          page: 2,
+          pageSize: 20
+        }
+      );
+      const newSortParam: SortParams = {
+        order: 'desc',
+        sortBy: 'name'
+      };
+      service.setFilter(newSortParam);
+      expect(service._setItem).toHaveBeenCalled();
+      expect(filter).toEqual(
+        {
           order: 'desc',
           sortBy: 'name',
           page: 2,
           pageSize: 20
         }
-      ]);
-    });
-    
-    it('should push new entity filter to filters', () => {
-      service.filter(sortParam);
-      expect(filters).toEqual([sortParam]);
-      const newSortParam: SortParams = {
-        entity: 'entity1',
-        order: 'asc',
-        sortBy: 'sort'
-      };
-      const expectedFilters = [
-        sortParam,
-        newSortParam
-      ];
-      service.filter(newSortParam);
-      expect(filters).toEqual(expectedFilters);
-      
-      const pageParam: PageParams = {
-        entity: 'entity3',
-        page: 5,
-        pageSize: 30
-      };
-      
-      service.filter(pageParam);
-      expect(filters).toEqual([
-        ...expectedFilters,
-        pageParam
-      ]);
-      
-      expect(service.currentValue).toEqual(
-        [
-          ...expectedFilters,
-          pageParam
-        ]
       );
     });
-    
   });
   
 });

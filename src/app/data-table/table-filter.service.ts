@@ -7,7 +7,6 @@ export type Order = 'asc' | 'desc';
 export type PageSize = 10 | 20 | 30 | 50 | 100;
 
 export type TableFilter = {
-  entity: string,
   sortBy?: string,
   order?: Order,
   page?: number,
@@ -15,45 +14,60 @@ export type TableFilter = {
 }
 
 export type SortParams = {
-  entity: string,
   sortBy: string,
   order?: Order
 }
 
 export type PageParams = {
-  entity: string,
   page?: number,
   pageSize?: PageSize
 }
 
-export type TableFilters = TableFilter[];
-
 @Injectable()
 export class TableFilterService {
   
-  private _filters: BehaviorSubject<TableFilters> = new BehaviorSubject([]);
+  private _defaultFilter: TableFilter = {
+    sortBy: 'created',
+    order: 'desc',
+    page: 1,
+    pageSize: 10
+  };
   
-  public filters: Observable<TableFilters> = this._filters.asObservable();
+  private _entityName: string;
   
-  public currentValue: TableFilters = [];
+  private _filter: BehaviorSubject<TableFilter> = new BehaviorSubject<TableFilter>(this._defaultFilter);
   
-  constructor() {
+  public filter: Observable<TableFilter> = this._filter.asObservable();
+  
+  public get currentFilter(): TableFilter {
+    return this._filter.getValue();
   }
   
-  filter(param: SortParams | PageParams | TableFilter) {
-    let tableFilters = this._filters.getValue();
-    let f = _.find(tableFilters, (p) => p.entity === param.entity);
-    if (f) {
-      _.extend(f, param);
-    } else {
-      let newFilter: TableFilter = { entity: param.entity };
-      _.extend(newFilter, param);
-      tableFilters.push(newFilter);
+  setFilter(param: SortParams | PageParams | TableFilter) {
+    let f = _.cloneDeep(this.currentFilter);
+    _.extend(f, param);
+    this._setItem(f);
+    this._filter.next(f);
+  }
+  
+  init(entityName: string) {
+    this._entityName = entityName;
+    let savedFilter = this._getItem();
+    if (!savedFilter) {
+      this._setItem(this._defaultFilter);
+      return;
     }
-    this._filters.next(tableFilters);
-    this.currentValue = tableFilters;
-    
+    this._filter = new BehaviorSubject<TableFilter>(savedFilter);
   }
+  
+  _setItem(f: TableFilter) {
+    localStorage.setItem(this._entityName, JSON.stringify(f));
+  }
+  
+  _getItem(): TableFilter {
+    return JSON.parse(localStorage.getItem(this._entityName));
+  }
+  
 }
 
 
