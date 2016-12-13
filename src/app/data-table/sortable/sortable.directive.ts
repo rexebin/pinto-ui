@@ -17,7 +17,12 @@ export class SortableDirective implements OnDestroy, OnInit {
   private _subscription: Subscription;
   
   constructor(private filterService: TableFilterService, private elementRef: ElementRef) {
-    
+    let myvar: {name: 'myname', gender: 'male'};
+    type Person = {
+      name: string,
+      gender: string
+    }
+    type Persons = Person[];
   }
   
   ngOnInit(): void {

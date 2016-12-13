@@ -98,7 +98,6 @@ fdescribe('SortableDirective', () => {
   it('should not touch original inner content of the element', () => {
     nativeElement.click();
     fixture.detectChanges();
-    console.log(nativeElement);
     expect(nativeElement.querySelector('strong')).toBeTruthy();
     const sortByOtherParam: SortParams = {
       entity: 'entity',
@@ -106,11 +105,9 @@ fdescribe('SortableDirective', () => {
       order: 'asc'
     };
     tableFilterService.filter(sortByOtherParam);
-    console.log(nativeElement);
     expect(nativeElement.querySelector('strong')).toBeTruthy();
     nativeElement.click();
     fixture.detectChanges();
-    console.log(nativeElement);
     expect(nativeElement.querySelector('strong')).toBeTruthy();
   });
   
