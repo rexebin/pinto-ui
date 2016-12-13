@@ -59,12 +59,7 @@ export class SortableDirective implements OnDestroy, OnInit {
       order: this.order
     };
     this.filterService.filter(filterParam);
-    
-    if (this.order === 'asc') {
-      this.order = 'desc';
-    } else if (this.order === 'desc') {
-      this.order = 'asc';
-    }
+    this.order = this.order === 'asc' ? 'desc' : 'asc';
   }
   
   ngOnDestroy(): void {
