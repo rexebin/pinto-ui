@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 import { TableFilterService, SortParams } from '../table-filter.service';
 import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
 
-fdescribe('SortableDirective', () => {
+describe('SortableDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   let debugElement: DebugElement;
