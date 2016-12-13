@@ -30,11 +30,11 @@ export class SortableDirective implements OnDestroy, OnInit {
           return;
         }
         return;
-      } else {
-        if (f.sortBy !== this.sortBy && el) {
-            this.elementRef.nativeElement.removeChild(el);
-          return;
-        }
+      }
+      
+      if (f.sortBy !== this.sortBy && el) {
+        this.elementRef.nativeElement.removeChild(el);
+        return;
       }
       
       let icon: HTMLElement = document.createElement('i');
