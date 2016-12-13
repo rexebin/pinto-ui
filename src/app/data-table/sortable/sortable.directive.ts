@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { TableFilterService, Order } from '../table-filter.service';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
@@ -33,7 +33,7 @@ export class SortableDirective implements OnDestroy, OnInit {
       }
       
       if (f.sortBy !== this.sortBy) {
-        if(el){
+        if (el) {
           this.elementRef.nativeElement.removeChild(el);
           return;
         }
@@ -52,7 +52,7 @@ export class SortableDirective implements OnDestroy, OnInit {
       } else {
         this.elementRef.nativeElement.replaceChild(icon, el);
       }
-  
+      
       this.order = f.order;
     });
   }
