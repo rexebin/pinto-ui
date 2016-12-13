@@ -5,6 +5,7 @@ import { SortableDirective } from './sortable.directive';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TableFilterService, SortParams } from '../table-filter.service';
+import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
 
 fdescribe('SortableDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -37,7 +38,7 @@ fdescribe('SortableDirective', () => {
       sortBy: 'property'
     };
     spyOn(sortable, 'onClick').and.callThrough();
-    spyOn(tableFilterService, 'filter');
+    spyOn(tableFilterService, 'filter').and.callThrough();
     
   });
   
@@ -53,35 +54,37 @@ fdescribe('SortableDirective', () => {
     expect(tableFilterService.filter).toHaveBeenCalledWith(expectedParams);
   });
     
-  it('should show an upper arrow indicate asc order after emit event with asc', async(() => {
+  it('should show an upper arrow indicate asc order after emit event with asc', () => {
     debugElement.nativeElement.click();
     fixture.detectChanges();
-    expect(debugElement.query(By.css('i.caret-up'))).toBeTruthy();
-  }));
+    expect(debugElement.nativeElement.querySelector('i.fa-caret-up')).toBeTruthy();
+  });
   
   it('should show a downward arrow indicate desc order after emit event with desc', async(() => {
     debugElement.nativeElement.click();
     fixture.detectChanges();
     debugElement.nativeElement.click();
-    expect(debugElement.query(By.css('i.caret-down'))).toBeTruthy();
+    expect(debugElement.nativeElement.querySelector('i.fa-caret-down')).toBeTruthy();
   }));
   
   it('should hide arrow when not ordered by host element\'s property', async(() => {
     debugElement.nativeElement.click();
     fixture.detectChanges();
+    expect(debugElement.nativeElement.querySelector('i.pt-sort-icon')).toBeTruthy();
     const sortByOtherPropertyParam: SortParams = {
       entity: 'entity',
       sortBy: 'otherProperty'
     };
     tableFilterService.filter(sortByOtherPropertyParam);
-    expect(debugElement.query(By.css('i'))).toBeFalsy();
+    fixture.detectChanges();
+    expect(debugElement.nativeElement.querySelector('i.pt-sort-icon')).toBeFalsy();
   }));
   
 });
 
 @Component({
   selector: '',
-  template: `<div ptSortable [sortBy]="'property'" [entityName]="'entity'"></div>`
+  template: `<div ptSortable [sortBy]="'property'" [entityName]="'entity'">Property</div>`
 })
 class TestComponent {
 }

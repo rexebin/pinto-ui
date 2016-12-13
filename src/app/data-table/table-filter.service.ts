@@ -49,6 +49,7 @@ export class TableFilterService {
       tableFilters.push(newFilter);
     }
     this._filters.next(tableFilters);
+    
   }
 }
 

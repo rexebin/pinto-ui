@@ -1,7 +1,8 @@
-import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, OnDestroy, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { TableFilterService, Order } from '../table-filter.service';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
+
 @Directive({
   selector: '[ptSortable]',
   host: {
@@ -21,38 +22,65 @@ export class SortableDirective implements OnDestroy, OnInit {
   
   ngOnInit(): void {
     this._subscription = this.filterService.filters.subscribe(filters => {
-      let el: HTMLElement = this.elementRef.nativeElement.querySelector('i[class=^"fa-caret"');
       let f = _.find(filters, (value) => value.entity === this.entityName);
-      if (!f || (f && f.sortBy !== this.sortBy)) {
+      let el: HTMLElement = this.elementRef.nativeElement.querySelector('i.pt-sort-icon');
+      if (!f) {
         if (el) {
           this.elementRef.nativeElement.removeChild(el);
+          return;
+        }
+        return;
+      } else {
+        if (f.sortBy !== this.sortBy && el) {
+            this.elementRef.nativeElement.removeChild(el);
+          return;
         }
       }
-      if (f && f.sortBy === this.sortBy) {
-        if (el) {
-          if (f.order === 'asc') {
-            if (el.classList.contains('fa-caret-down')) {
-              el.classList.remove('fa-caret-down');
-            }
-            el.classList.add('fa-caret-up');
-          }
-          if (f.order === 'desc') {
-            if (el.classList.contains('fa-caret-up')) {
-              el.classList.remove('fa-caret-up');
-            }
-            el.classList.add('fa-caret-down');
-          }
-        } else {
-          if (f.order === 'asc') {
-            this.elementRef.nativeElement.appendChild('<i class="fa fa-caret-up"></i>');
-          }
-          if(f.order === 'desc'){
-            this.elementRef.nativeElement.appendChild('<i class="fa fa-caret-down"></i>');
-          }
-          
-        }
-        
+      
+      let icon: HTMLElement = document.createElement('i');
+      icon.classList.add('fa', 'pt-sort-icon');
+      if (this.order === 'asc')
+        icon.classList.add('fa-caret-up');
+      if (this.order === 'desc')
+        icon.classList.add('fa-caret-down');
+      
+      if (!el) {
+        this.elementRef.nativeElement.appendChild(icon);
+      } else {
+        this.elementRef.nativeElement.replaceChild(icon, el);
       }
+      
+      //let f = _.find(filters, (value) => value.entity === this.entityName);
+      //if (!f || (f && f.sortBy !== this.sortBy)) {
+      //  if (el) {
+      //    this.elementRef.nativeElement.removeChild(el);
+      //  }
+      //}
+      //if (f && f.sortBy === this.sortBy) {
+      //  if (el) {
+      //    if (f.order === 'asc') {
+      //      if (el.classList.contains('fa-caret-down')) {
+      //        el.classList.remove('fa-caret-down');
+      //      }
+      //      el.classList.add('fa-caret-up');
+      //    }
+      //    if (f.order === 'desc') {
+      //      if (el.classList.contains('fa-caret-up')) {
+      //        el.classList.remove('fa-caret-up');
+      //      }
+      //      el.classList.add('fa-caret-down');
+      //    }
+      //  } else {
+      //    if (f.order === 'asc') {
+      //      this.elementRef.nativeElement.appendChild('<i class="fa fa-caret-up"></i>');
+      //    }
+      //    if(f.order === 'desc'){
+      //      this.elementRef.nativeElement.appendChild('<i class="fa fa-caret-down"></i>');
+      //    }
+      //
+      //  }
+      //
+      //}
     });
   }
   
