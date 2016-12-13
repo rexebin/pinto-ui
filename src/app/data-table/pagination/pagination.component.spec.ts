@@ -30,10 +30,6 @@ describe('PaginationComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should read total items and current page number from host component', () => {
-    
-  });
-  
   it('should handle page changing and call filter action in TableFilterService', () => {
     
   });
