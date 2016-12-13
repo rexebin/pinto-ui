@@ -95,11 +95,30 @@ fdescribe('SortableDirective', () => {
     expect(nativeElement.querySelector('i.fa-caret-down')).toBeTruthy();
   });
   
+  it('should not touch original inner content of the element', () => {
+    nativeElement.click();
+    fixture.detectChanges();
+    console.log(nativeElement);
+    expect(nativeElement.querySelector('strong')).toBeTruthy();
+    const sortByOtherParam: SortParams = {
+      entity: 'entity',
+      sortBy: 'otherProperty',
+      order: 'asc'
+    };
+    tableFilterService.filter(sortByOtherParam);
+    console.log(nativeElement);
+    expect(nativeElement.querySelector('strong')).toBeTruthy();
+    nativeElement.click();
+    fixture.detectChanges();
+    console.log(nativeElement);
+    expect(nativeElement.querySelector('strong')).toBeTruthy();
+  });
+  
 });
 
 @Component({
   selector: '',
-  template: `<div ptSortable [sortBy]="'property'" [entityName]="'entity'">Property</div>`
+  template: `<div ptSortable [sortBy]="'property'" [entityName]="'entity'"><strong>Property</strong></div>`
 })
 class TestComponent {
 }
