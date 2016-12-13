@@ -13,7 +13,7 @@ export class SortableDirective implements OnDestroy, OnInit {
   
   @Input() entityName: string;
   @Input() sortBy: string;
-  order: Order = 'asc';
+  order: Order = 'desc';
   private _subscription: Subscription;
   
   constructor(private filterService: TableFilterService, private elementRef: ElementRef) {
@@ -32,8 +32,11 @@ export class SortableDirective implements OnDestroy, OnInit {
         return;
       }
       
-      if (f.sortBy !== this.sortBy && el) {
-        this.elementRef.nativeElement.removeChild(el);
+      if (f.sortBy !== this.sortBy) {
+        if(el){
+          this.elementRef.nativeElement.removeChild(el);
+          return;
+        }
         return;
       }
       
@@ -49,17 +52,19 @@ export class SortableDirective implements OnDestroy, OnInit {
       } else {
         this.elementRef.nativeElement.replaceChild(icon, el);
       }
+  
+      this.order = f.order;
     });
   }
   
   onClick() {
+    this.order = this.order === 'asc' ? 'desc' : 'asc';
     let filterParam = {
       entity: this.entityName,
       sortBy: this.sortBy,
       order: this.order
     };
     this.filterService.filter(filterParam);
-    this.order = this.order === 'asc' ? 'desc' : 'asc';
   }
   
   ngOnDestroy(): void {

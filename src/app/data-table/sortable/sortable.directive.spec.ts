@@ -14,6 +14,7 @@ fdescribe('SortableDirective', () => {
   let sortParam: SortParams;
   let sortable: SortableDirective;
   let tableFilterService: TableFilterService;
+  let nativeElement: HTMLElement;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -31,6 +32,7 @@ fdescribe('SortableDirective', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     debugElement = fixture.debugElement.query(By.directive(SortableDirective));
+    nativeElement = debugElement.nativeElement;
     sortable = debugElement.injector.get(SortableDirective);
     tableFilterService = TestBed.get(TableFilterService);
     sortParam = {
@@ -45,39 +47,53 @@ fdescribe('SortableDirective', () => {
   it('should emit filter event with sortby and order when clicking the host element', () => {
     let expectedParams = sortParam;
     expectedParams.order = 'asc';
-    debugElement.nativeElement.click();
+    nativeElement.click();
     expect(sortable.onClick).toHaveBeenCalled();
     expect(tableFilterService.filter).toHaveBeenCalledWith(expectedParams);
     expectedParams.order = 'desc';
-    debugElement.nativeElement.click();
+    nativeElement.click();
     expect(sortable.onClick).toHaveBeenCalled();
     expect(tableFilterService.filter).toHaveBeenCalledWith(expectedParams);
   });
     
   it('should show an upper arrow indicate asc order after emit event with asc', () => {
-    debugElement.nativeElement.click();
+    nativeElement.click();
     fixture.detectChanges();
-    expect(debugElement.nativeElement.querySelector('i.fa-caret-up')).toBeTruthy();
+    expect(nativeElement.querySelector('i.fa-caret-up')).toBeTruthy();
   });
   
   it('should show a downward arrow indicate desc order after emit event with desc', async(() => {
-    debugElement.nativeElement.click();
+    nativeElement.click();
     fixture.detectChanges();
-    debugElement.nativeElement.click();
-    expect(debugElement.nativeElement.querySelector('i.fa-caret-down')).toBeTruthy();
+    nativeElement.click();
+    expect(nativeElement.querySelector('i.fa-caret-down')).toBeTruthy();
   }));
   
   it('should hide arrow when not ordered by host element\'s property', async(() => {
-    debugElement.nativeElement.click();
-    fixture.detectChanges();
-    expect(debugElement.nativeElement.querySelector('i.pt-sort-icon')).toBeTruthy();
     const sortByOtherPropertyParam: SortParams = {
       entity: 'entity',
       sortBy: 'otherProperty'
     };
     tableFilterService.filter(sortByOtherPropertyParam);
-    expect(debugElement.nativeElement.querySelector('i.pt-sort-icon')).toBeFalsy();
+    expect(nativeElement.querySelector('i.pt-sort-icon')).toBeFalsy();
+    nativeElement.click();
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('i.pt-sort-icon')).toBeTruthy();
+    tableFilterService.filter(sortByOtherPropertyParam);
+    expect(nativeElement.querySelector('i.pt-sort-icon')).toBeFalsy();
   }));
+  
+  it('should read the order from service', () => {
+    const sortByDesc: SortParams = {
+      entity: 'entity',
+      sortBy: 'property',
+      order: 'asc'
+    };
+    tableFilterService.filter(sortByDesc);
+    nativeElement.click();
+    fixture.detectChanges();
+    expect(nativeElement.querySelector('i.fa-caret-down')).toBeTruthy();
+  });
   
 });
 
