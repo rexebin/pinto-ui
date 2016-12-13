@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { TableFilterService } from '../table-filter.service';
 
 @Component({
   selector: 'pt-pagination',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit {
-
-  constructor() { }
-
+  
+  @Input() collectionSize: number;
+  page: number = 1;
+  
+  constructor(private tableFilterService: TableFilterService) {
+  }
+  
   ngOnInit() {
   }
-
+  
+  pageChange(p: number){
+    this.page = p;
+  }
+  
 }
