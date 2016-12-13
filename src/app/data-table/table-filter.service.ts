@@ -35,6 +35,8 @@ export class TableFilterService {
   
   public filters: Observable<TableFilters> = this._filters.asObservable();
   
+  public currentValue: TableFilters = [];
+  
   constructor() {
   }
   
@@ -49,6 +51,7 @@ export class TableFilterService {
       tableFilters.push(newFilter);
     }
     this._filters.next(tableFilters);
+    this.currentValue = tableFilters;
     
   }
 }

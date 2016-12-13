@@ -33,12 +33,7 @@ Other constraints:
 
 ## Pagination
 
-1. pagination preferences goes to default settings: 
-  * items size
-1. pagination using ng-bootstrap pagination widget.
-1. wrapped in a container
-1. on mobile, item size controller is hidden
-
+[pagination](./pagination/pagination.md)
 
 ## Column width
 

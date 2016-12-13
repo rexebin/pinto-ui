@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { DataTableComponent } from './data-table.component';
+import { PageSizeComponent } from './page-size.component';
 
-describe('DataTableComponent', () => {
-  let component: DataTableComponent;
-  let fixture: ComponentFixture<DataTableComponent>;
+describe('PageSizeComponent', () => {
+  let component: PageSizeComponent;
+  let fixture: ComponentFixture<PageSizeComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataTableComponent ]
+      declarations: [ PageSizeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataTableComponent);
+    fixture = TestBed.createComponent(PageSizeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -26,15 +26,11 @@ describe('DataTableComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should handle search and update items observable', () => {
+  it('should read current items per page from TableFilterService and if null use default value', () => {
     
   });
   
-  it('should listen to TableFilterService and update items observable', () => {
-    
-  });
-  
-  it('should ', () => {
+  it('should handle items per page settings and call filter action in TableFilterService', () => {
     
   });
 });

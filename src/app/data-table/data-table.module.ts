@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FormModule } from '../form/form.module';
 import { SortableDirective } from './sortable/sortable.directive';
 import { TableFilterService } from './table-filter.service';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @NgModule({
   imports: [
@@ -12,10 +13,15 @@ import { TableFilterService } from './table-filter.service';
     SharedModule,
     FormModule
   ],
-  exports: [DataTableComponent],
+  exports: [
+    DataTableComponent,
+    SortableDirective,
+    PaginationComponent
+  ],
   declarations: [
     DataTableComponent,
-    SortableDirective
+    SortableDirective,
+    PaginationComponent
   ]
 })
 export class DataTableModule {

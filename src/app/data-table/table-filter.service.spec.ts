@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { TableFilterService, TableFilters, SortParams, PageParams } from './table-filter.service';
 
-describe('TableFilterService', () => {
+fdescribe('TableFilterService', () => {
   let service: TableFilterService;
   let filters: TableFilters;
   beforeEach(() => {
@@ -32,12 +32,14 @@ describe('TableFilterService', () => {
         sortBy: 'property'
       };
     });
-    it('should return correct value', () => {
+    it('should return correct value and return current value', () => {
+      expect(service.currentValue).toEqual([]);
       service.filter(sortParam);
       expect(filters).toEqual([sortParam]);
+      expect(service.currentValue).toEqual([sortParam]);
     });
     
-    it('should update value', () => {
+    it('should update value and return current value', () => {
       service.filter(sortParam);
       expect(filters).toEqual([sortParam]);
       const newSortParam: SortParams = {
@@ -47,6 +49,7 @@ describe('TableFilterService', () => {
       };
       service.filter(newSortParam);
       expect(filters).toEqual([newSortParam]);
+      expect(service.currentValue).toEqual([newSortParam]);
     });
     
     it('should handle both sort and page correctly', () => {
@@ -123,6 +126,13 @@ describe('TableFilterService', () => {
         ...expectedFilters,
         pageParam
       ]);
+      
+      expect(service.currentValue).toEqual(
+        [
+          ...expectedFilters,
+          pageParam
+        ]
+      );
     });
     
   });
