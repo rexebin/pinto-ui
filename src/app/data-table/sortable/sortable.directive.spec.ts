@@ -76,7 +76,6 @@ fdescribe('SortableDirective', () => {
       sortBy: 'otherProperty'
     };
     tableFilterService.filter(sortByOtherPropertyParam);
-    fixture.detectChanges();
     expect(debugElement.nativeElement.querySelector('i.pt-sort-icon')).toBeFalsy();
   }));
   

@@ -49,38 +49,6 @@ export class SortableDirective implements OnDestroy, OnInit {
       } else {
         this.elementRef.nativeElement.replaceChild(icon, el);
       }
-      
-      //let f = _.find(filters, (value) => value.entity === this.entityName);
-      //if (!f || (f && f.sortBy !== this.sortBy)) {
-      //  if (el) {
-      //    this.elementRef.nativeElement.removeChild(el);
-      //  }
-      //}
-      //if (f && f.sortBy === this.sortBy) {
-      //  if (el) {
-      //    if (f.order === 'asc') {
-      //      if (el.classList.contains('fa-caret-down')) {
-      //        el.classList.remove('fa-caret-down');
-      //      }
-      //      el.classList.add('fa-caret-up');
-      //    }
-      //    if (f.order === 'desc') {
-      //      if (el.classList.contains('fa-caret-up')) {
-      //        el.classList.remove('fa-caret-up');
-      //      }
-      //      el.classList.add('fa-caret-down');
-      //    }
-      //  } else {
-      //    if (f.order === 'asc') {
-      //      this.elementRef.nativeElement.appendChild('<i class="fa fa-caret-up"></i>');
-      //    }
-      //    if(f.order === 'desc'){
-      //      this.elementRef.nativeElement.appendChild('<i class="fa fa-caret-down"></i>');
-      //    }
-      //
-      //  }
-      //
-      //}
     });
   }
   
