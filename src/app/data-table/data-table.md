@@ -1,5 +1,11 @@
 # Data table
 
+Data Table component is a dummy component for all entity lists:
+1. it provides a array of items to list-view component
+1. it includes search, sort and pagination components, which communicate with itself via TableFilterService
+1. Data Table component is responsible to make sure the items supplied to list-view component is paged, sorted and filtered.
+1. List-view component is only reponsible for handling displaying the items from Data Table component
+
 ## Search
 
 Search function on the client side is pure and simple: 
@@ -19,9 +25,9 @@ Other constraints:
 1. search box is full width on mobile
  
 ## Sort
-1. server's default sort column is created time.
+1. server's default sort column is set on fetching.
 1. Clicking on table header to toggle asc-desc
-1. pass a sort property string and a bool to indicate asc or desc to server, expect server to result result.
+1. pass a sort property string to server, expect server to return result.
 1. when sorted, show up and down arrow on the header to indicate user which column is being sorted. 
 1. respect search and pagination preferences
 
