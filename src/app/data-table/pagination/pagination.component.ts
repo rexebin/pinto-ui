@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableFilterService } from '../table-filter.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { TableFilterService } from '../table-filter.service';
 export class PaginationComponent implements OnInit {
   
   @Input() collectionSize: number;
-  page: number = 1;
+  page: number = 0;
   
   constructor(private tableFilterService: TableFilterService) {
   }
@@ -19,6 +19,7 @@ export class PaginationComponent implements OnInit {
   
   pageChange(p: number){
     this.page = p;
+    this.tableFilterService.setFilter({page: p});
   }
   
 }
