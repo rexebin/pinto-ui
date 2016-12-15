@@ -19,7 +19,7 @@ import {AppRoutingModule} from "./app-routing.module";
         HttpModule,
         CoreModule.forRoot(),
         AppRoutingModule,
-        FormModule,
+        FormModule.forRoot(),
         LayoutModule.forRoot(),
     ],
     providers: [],
