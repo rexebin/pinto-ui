@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TableFilterService, PageSize } from '../table-filter.service';
 
 @Component({
   selector: 'pt-page-size',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-size.component.scss']
 })
 export class PageSizeComponent implements OnInit {
-
-  constructor() { }
+  
+  pageSize: PageSize;
+  constructor(private tableFilterService: TableFilterService) { }
 
   ngOnInit() {
+    this.pageSize = this.tableFilterService.currentFilter.pageSize;
+  }
+  
+  setPageSize(pageSize: PageSize){
+    this.tableFilterService.setFilter({ pageSize: pageSize });
   }
 
 }

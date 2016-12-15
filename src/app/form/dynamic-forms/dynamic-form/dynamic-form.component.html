@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h2>{{title}}</h2>
+</div>
+<div class="modal-body clearfix">
+    <form [ngFormModel]="form">
+        <div *ngFor="let control of controls" class="mdl-textfield">
+            <pinto-dynamic-form-control [control]="control" [form]="form"></pinto-dynamic-form-control>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" (click)="discard()"><i class="fa fa-remove"></i>&nbsp;Discard</button>
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="!form.valid"><i class="fa fa-edit"></i>&nbsp;Save
+    </button>
+</div>
+<div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong><br>{{payLoad}}
+</div>
+<div *ngIf="errorMessage" class="form-row">
+  <strong>Error</strong><br>{{errorMessage}}
+</div>

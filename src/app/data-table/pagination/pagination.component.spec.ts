@@ -7,7 +7,7 @@ import { PaginationComponent } from './pagination.component';
 import { TableFilterService, TableFilter } from '../table-filter.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-fdescribe('PaginationComponent', () => {
+describe('PaginationComponent', () => {
   let component: PaginationComponent;
   let fixture: ComponentFixture<PaginationComponent>;
   let tableFilterService: TableFilterService;

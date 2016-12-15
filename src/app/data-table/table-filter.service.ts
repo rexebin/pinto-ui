@@ -31,7 +31,7 @@ export class TableFilterService {
       sortBy: 'created',
       order: 'desc',
       page: 1,
-      pageSize: 10
+      pageSize: 20
     };
   }
   
