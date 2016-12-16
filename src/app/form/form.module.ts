@@ -1,5 +1,4 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from "./search/search.component";
 import { DynamicFormComponent } from './dynamic-forms/dynamic-form/dynamic-form.component';
@@ -8,6 +7,7 @@ import { ControlMessagesComponent } from './validation/control-messages.componen
 import { EmailValidator } from './validation/validate-email.class';
 import { ValidationService } from './validation/validation.service';
 import { FormControlService } from './dynamic-forms/form-control.service';
+import { SharedModule } from '../shared/shared.module';
 
 /**
  * FormModule is to hold all common form related components, directive and pipes.
@@ -16,7 +16,7 @@ import { FormControlService } from './dynamic-forms/form-control.service';
 
 @NgModule({
   imports: [
-    CommonModule,
+    SharedModule,
     ReactiveFormsModule
   ],
   exports: [

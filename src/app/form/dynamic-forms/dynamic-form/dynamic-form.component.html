@@ -2,7 +2,7 @@
     <h2>{{title}}</h2>
 </div>
 <div class="modal-body clearfix">
-    <form [ngFormModel]="form">
+    <form [formGroup]="form">
         <div *ngFor="let control of controls" class="mdl-textfield">
             <pinto-dynamic-form-control [control]="control" [form]="form"></pinto-dynamic-form-control>
         </div>

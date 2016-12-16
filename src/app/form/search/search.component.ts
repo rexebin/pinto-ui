@@ -20,7 +20,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     this._subscription = this.searchControl.valueChanges.debounceTime(this.debounce).subscribe(value => {
       this._search(value);
     });
-  }
+    // the following would do the same as using _search to filter out repetitive emit.
+    // however, there is other place to emit value, therefore, use the same function is a better choice here.
+    //.distinctUntilChanged((a, b) => a === b, (v) => v.trim())
+    //    .subscribe(value => {
+    //      this.search.emit(value.trim());
+    //    });
+    }
   
   onClick() {
     this._search(this.searchControl.value);

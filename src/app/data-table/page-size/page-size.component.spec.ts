@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { PageSizeComponent } from './page-size.component';
 import { TableFilterService } from '../table-filter.service';
 
-fdescribe('PageSizeComponent', () => {
+describe('PageSizeComponent', () => {
   let component: PageSizeComponent;
   let fixture: ComponentFixture<PageSizeComponent>;
   let tableFilterService: TableFilterService;

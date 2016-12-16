@@ -1,10 +1,10 @@
-<div [ngFormModel]="form">
+<div [formGroup]="form">
     <div>
         <label [attr.for]="control.key" class="mdl-textfield__label">{{(control.label || control.key) | humanize}}</label>
         <div [ngSwitch]="control.controlType">
-            <md-input *ngSwitchWhen="textBox" [ngControl]="control.key"
-                   [id]="control.key" [type]="control.type" class="mdl-textfield__input"></md-input>
-            <select [id]="control.key" *ngSwitchWhen="dropDown" [ngControl]="control.key">
+            <input *ngSwitchCase="textBox" [formControl]="control.key"
+                   [id]="control.key" [type]="control.type" class="mdl-textfield__input">
+            <select [id]="control.key" *ngSwitchCase="dropDown" [formControl]="control.key">
                 <option *ngFor="let opt of control.options" [value]="opt.id"
                         [selected]="opt.id == control.value">
                     {{opt.displayName}}

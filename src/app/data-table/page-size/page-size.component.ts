@@ -8,7 +8,14 @@ import { TableFilterService, PageSize } from '../table-filter.service';
 })
 export class PageSizeComponent implements OnInit {
   
-  pageSize: PageSize;
+  pageSize: PageSize = 20;
+  options = [
+    {pageSize: 10, description: '10 items per page'},
+    {pageSize: 20, description: '20 items per page'},
+    {pageSize: 30, description: '30 items per page'},
+    {pageSize: 50, description: '50 items per page'},
+    {pageSize: 100, description: '100 items per page'}
+  ];
   constructor(private tableFilterService: TableFilterService) { }
 
   ngOnInit() {

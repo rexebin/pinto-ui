@@ -1,6 +1,6 @@
 import { Component, Host, Input } from '@angular/core';
 import { ValidationService } from './validation.service';
-import { FormGroup } from '@angular/forms';
+import { FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'control-messages',
@@ -10,14 +10,14 @@ import { FormGroup } from '@angular/forms';
 export class ControlMessagesComponent {
   @Input('control') controlName: string;
   
-  constructor(@Host() private formGroup: FormGroup, private validationService: ValidationService) {
+  constructor(@Host() private formGroup: FormGroupDirective, private validationService: ValidationService) {
     
   }
   
   get errorMessage() {
     // Find the control in the Host (Parent) form
     
-    let c = this.formGroup.controls[this.controlName];
+    let c = this.formGroup.directives.find(dir => dir.name ===this.controlName);
     
     for (let propertyName in c.errors) {
       // If control has a error

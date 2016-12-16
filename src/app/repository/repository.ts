@@ -1,10 +1,10 @@
 ﻿import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {IEntity} from './entity.interface';
-import {ListParamInterface} from '../master-detail/data-table/list.service.interface.ts';
 import {Injectable} from '@angular/core';
-import {LoggerService} from '../common/logger/logger.service';
 import {ISearchResult} from './search-result.interface';
+import { LoggerService } from '../core/logger/logger.service';
+import { TableFilterService } from '../data-table/table-filter.service';
 @Injectable()
 export class Repository {
   baseUrl: string = 'http://localhost:5000/api/';
@@ -35,14 +35,14 @@ export class Repository {
     return undefined;
   };
 
-  getAll(entityName: string, listParam: ListParamInterface): Observable<ISearchResult> {
-    let url = this.getApiUrl(entityName);
-    url =
-      `${url}?q=${listParam.search}&_sort=${listParam.orderBy}&_order=${listParam.reverse ? 'DESC' :
-        'ASC'}&_start=${(listParam.page - 1) * listParam.itemsPerPage}&_limit=${listParam.itemsPerPage}`;
-    return this._http.get(url).map(this.extractData)
-      .catch(this.handleError);
-  };
+  //getAll(entityName: string, listParam: TableFilterService): Observable<ISearchResult> {
+  //  let url = this.getApiUrl(entityName);
+  //  url =
+  //    `${url}?q=${listParam.search}&_sort=${listParam.orderBy}&_order=${listParam.reverse ? 'DESC' :
+  //      'ASC'}&_start=${(listParam.page - 1) * listParam.itemsPerPage}&_limit=${listParam.itemsPerPage}`;
+  //  return this._http.get(url).map(this.extractData)
+  //    .catch(this.handleError);
+  //};
 
   getDisplayName(entityName: string) {
     let url = this.getApiUrl(entityName);

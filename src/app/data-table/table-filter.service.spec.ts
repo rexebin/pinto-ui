@@ -24,7 +24,7 @@ describe('TableFilterService', () => {
       sortBy: 'created',
       order: 'desc',
       page: 1,
-      pageSize: 10
+      pageSize: 20
     };
     sortParam = {
       order: 'asc',
@@ -34,7 +34,7 @@ describe('TableFilterService', () => {
       order: 'asc',
       sortBy: 'property',
       page: 1,
-      pageSize: 10
+      pageSize: 20
     };
   });
   describe('Without localStorage', () => {
