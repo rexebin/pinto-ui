@@ -1,6 +1,6 @@
 import { Component, Host, Input } from '@angular/core';
 import { ValidationService } from './validation.service';
-import { FormGroupDirective } from '@angular/forms';
+import { FormGroupDirective, NgControl } from '@angular/forms';
 
 @Component({
   selector: 'control-messages',
@@ -17,7 +17,7 @@ export class ControlMessagesComponent {
   get errorMessage() {
     // Find the control in the Host (Parent) form
     
-    let c = this.formGroup.directives.find(dir => dir.name ===this.controlName);
+    let c: NgControl = this.formGroup.directives.find(dir => dir.name === this.controlName);
     
     for (let propertyName in c.errors) {
       // If control has a error
