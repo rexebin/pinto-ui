@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
-fdescribe('PageSizeComponent', () => {
+describe('PageSizeComponent', () => {
   let component: PageSizeComponent;
   let fixture: ComponentFixture<PageSizeComponent>;
   let tableFilterService: TableFilterService;
