@@ -5,7 +5,7 @@
 export class ServiceUser {
   
   constructor(public id: number,
-              public givenName: string,
+              public firstName: string,
               public surname: string,
               public dateOfBirth: string) {
   }
