@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { DataTableComponent } from './data-table.component';
+import { SearchComponent } from '../../form/search/search.component';
 
 describe('DataTableComponent', () => {
   let component: DataTableComponent;
@@ -27,6 +28,8 @@ describe('DataTableComponent', () => {
   });
   
   it('should handle search and update items observable', () => {
+    
+    
     
   });
   
