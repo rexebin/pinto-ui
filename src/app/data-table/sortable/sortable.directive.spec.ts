@@ -2,12 +2,14 @@
 
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { SortableDirective } from './sortable.directive';
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, NgModule } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TableFilterService, SortParams } from '../table-filter.service';
 import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser_adapter';
+import { SortIndicatorComponent } from '../sort-indicator/sort-indicator.component';
+import { CommonModule } from '@angular/common';
 
-describe('SortableDirective', () => {
+fdescribe('SortableDirective', () => {
   
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,8 +17,9 @@ describe('SortableDirective', () => {
         TestComponent,
         SortableDirective
       ],
-      imports: [],
-      providers: [TableFilterService]
+      imports: [TestModule],
+      providers: [TableFilterService],
+      
     })
       .compileComponents();
   }));
@@ -125,3 +128,10 @@ describe('SortableDirective', () => {
 })
 class TestComponent {
 }
+
+@NgModule({
+  imports:[CommonModule],
+  entryComponents: [SortIndicatorComponent],
+  declarations:[SortIndicatorComponent]
+})
+class TestModule{}

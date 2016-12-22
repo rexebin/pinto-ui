@@ -6,6 +6,7 @@ import { FormModule } from '../form/form.module';
 import { SortableDirective } from './sortable/sortable.directive';
 import { TableFilterService } from './table-filter.service';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SortIndicatorComponent } from './sort-indicator/sort-indicator.component';
 
 @NgModule({
   imports: [
@@ -21,8 +22,10 @@ import { PaginationComponent } from './pagination/pagination.component';
   declarations: [
     DataTableComponent,
     SortableDirective,
-    PaginationComponent
-  ]
+    PaginationComponent,
+    SortIndicatorComponent
+  ],
+  entryComponents: [SortIndicatorComponent]
 })
 export class DataTableModule {
   static forRoot(): ModuleWithProviders {
