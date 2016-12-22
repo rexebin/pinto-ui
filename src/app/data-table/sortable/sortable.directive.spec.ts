@@ -9,7 +9,7 @@ import { BrowserDomAdapter } from '@angular/platform-browser/src/browser/browser
 import { SortIndicatorComponent } from '../sort-indicator/sort-indicator.component';
 import { CommonModule } from '@angular/common';
 
-fdescribe('SortableDirective', () => {
+describe('SortableDirective', () => {
   
   beforeEach(async(() => {
     TestBed.configureTestingModule({

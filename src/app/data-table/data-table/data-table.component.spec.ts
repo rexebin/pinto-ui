@@ -6,6 +6,10 @@ import { DebugElement } from '@angular/core';
 import { DataTableComponent } from './data-table.component';
 import { SearchComponent } from '../../form/search/search.component';
 import { TableFilterService } from '../table-filter.service';
+import { PaginationComponent } from '../pagination/pagination.component';
+import { PageSizeComponent } from '../page-size/page-size.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('DataTableComponent', () => {
   let component: DataTableComponent;
@@ -13,7 +17,8 @@ describe('DataTableComponent', () => {
   let tableService: TableFilterService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataTableComponent ]
+      imports: [ReactiveFormsModule, NgbModule.forRoot()],
+      declarations: [ DataTableComponent, SearchComponent, PaginationComponent, PageSizeComponent ]
     })
     .compileComponents();
   }));
