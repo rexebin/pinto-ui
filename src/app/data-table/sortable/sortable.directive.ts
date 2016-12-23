@@ -1,6 +1,6 @@
 import {
   Directive, Input, ElementRef, OnDestroy, OnInit, ComponentFactoryResolver,
-  ViewContainerRef, TemplateRef, Injector
+  ViewContainerRef, TemplateRef, Injector, ComponentFactory, ComponentRef
 } from '@angular/core';
 import { TableFilterService, Order, SortParams, TableFilter } from '../table-filter.service';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,7 @@ export class SortableDirective implements OnDestroy, OnInit {
   
   @Input() sortBy: string;
   private _order: Order;
+  private _dynamicComponent: ComponentRef<SortIndicatorComponent>;
   
   private _subscription: Subscription;
   
@@ -30,14 +31,14 @@ export class SortableDirective implements OnDestroy, OnInit {
     }
     
     const componentFactory = this._componentFactorResolver.resolveComponentFactory(SortIndicatorComponent);
-    const componentRef = componentFactory.create(this._injector);
-    this._elementRef.nativeElement.append(componentRef.location.nativeElement);
+    this._dynamicComponent = componentFactory.create(this._injector);
+    this._elementRef.nativeElement.append(this._dynamicComponent.location.nativeElement);
     
     this._subscription = this._filterService.filter.subscribe(filter => {
       //this._setIcon(filter);
-      componentRef.instance.isSorted = filter.sortBy === this.sortBy;
-      componentRef.instance.order = filter.order === 'asc';
-      componentRef.changeDetectorRef.detectChanges();
+      this._dynamicComponent.instance.isSorted = filter.sortBy === this.sortBy;
+      this._dynamicComponent.instance.order = filter.order === 'asc';
+      this._dynamicComponent.changeDetectorRef.detectChanges();
     });
   }
   
@@ -53,6 +54,9 @@ export class SortableDirective implements OnDestroy, OnInit {
   ngOnDestroy(): void {
     if (this._subscription) {
       this._subscription.unsubscribe();
+    }
+    if(this._dynamicComponent){
+      this._dynamicComponent.destroy();
     }
   }
   
