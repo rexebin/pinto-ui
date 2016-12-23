@@ -1,6 +1,6 @@
 import {
   Directive, Input, ElementRef, OnDestroy, OnInit, ComponentFactoryResolver,
-  ViewContainerRef, TemplateRef, Injector, ComponentFactory, ComponentRef
+  Injector, ComponentRef
 } from '@angular/core';
 import { TableFilterService, Order, SortParams, TableFilter } from '../table-filter.service';
 import { Subscription } from 'rxjs';
@@ -55,9 +55,7 @@ export class SortableDirective implements OnDestroy, OnInit {
     if (this._subscription) {
       this._subscription.unsubscribe();
     }
-    if(this._dynamicComponent){
-      this._dynamicComponent.destroy();
-    }
+    this._dynamicComponent.destroy();
   }
   
   //_setIcon(filter: TableFilter){
