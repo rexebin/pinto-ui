@@ -18,8 +18,7 @@ describe('SortableDirective', () => {
         SortableDirective
       ],
       imports: [TestModule],
-      providers: [TableFilterService],
-      
+      providers: [TableFilterService]
     })
       .compileComponents();
   }));
