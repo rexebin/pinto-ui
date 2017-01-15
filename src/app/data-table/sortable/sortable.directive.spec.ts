@@ -15,9 +15,9 @@ describe('SortableDirective', () => {
     TestBed.configureTestingModule({
       declarations: [
         TestComponent,
-        SortableDirective
+        SortableDirective,
+        SortIndicatorComponent
       ],
-      imports: [TestModule],
       providers: [TableFilterService]
     })
       .compileComponents();
@@ -123,14 +123,10 @@ describe('SortableDirective', () => {
 });
 @Component({
   selector: '',
-  template: `<div ptSortable [sortBy]="'property'"><strong>Property</strong></div>`
+  template: `<div ptSortable [sortBy]="'property'"><strong>Property</strong></div>`,
+  entryComponents: [SortIndicatorComponent]
 })
 class TestComponent {
+  
 }
 
-@NgModule({
-  imports:[CommonModule],
-  entryComponents: [SortIndicatorComponent],
-  declarations:[SortIndicatorComponent]
-})
-class TestModule{}
